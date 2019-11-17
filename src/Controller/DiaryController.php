@@ -9,11 +9,12 @@
 
     /**
      * Trening diary controller
+     * @Route("/login", name="diary")
      */
-    class DairyController extends AbstractFOSRestController
+    class DairyController extends AbstractController
     {
         /**
-         * @Route("", name="_index")
+         * @Route("/{$slug}", name="_index")
          */
         public function index() {
 
