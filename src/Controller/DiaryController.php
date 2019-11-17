@@ -9,14 +9,17 @@
 
     /**
      * Trening diary controller
-     * @Route("/login", name="diary")
+     * @Route("/login", name="")
      */
-    class DairyController extends AbstractController
+    class DiaryController extends AbstractController
     {
         /**
-         * @Route("/{$slug}", name="_index")
+         * @Route("/{$slug}", name="app_homepage")
          */
         public function index() {
 
+            
+
+            return $this->render('diary/index.html.twig');
         }
     }
