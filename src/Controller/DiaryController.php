@@ -18,8 +18,6 @@
          */
         public function index() {
 
-            
-
             return $this->render('diary/index.html.twig');
         }
     }
