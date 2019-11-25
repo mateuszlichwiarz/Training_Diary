@@ -20,4 +20,12 @@
 
             return $this->render('diary/index.html.twig');
         }
+
+        /**
+         * @Route("/new", name="app_new")
+         */
+        public function new() {
+            
+            return $this->render('diary/new.html.twig');
+        }
     }
