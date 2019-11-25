@@ -4,8 +4,12 @@
 
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
-    use Symfony\Component\Routing\Annotation\Route;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+    use FOS\RestBundle\Controller\FosRestController;
+    use FOS\RestBundle\Controller\Annotations as Rest;
+
+    use Symfony\Component\Routing\Annotation\Route;
 
     /**
      * Trening diary controller
@@ -22,7 +26,7 @@
         }
 
         /**
-         * @Route("/new", name="app_new")
+         * @Rest\Post("/{$slug}/new", name="app_new")
          */
         public function new() {
             
