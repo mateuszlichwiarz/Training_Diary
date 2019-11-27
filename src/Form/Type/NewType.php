@@ -29,6 +29,7 @@
                     'label' => false
                 ],
                 'allow_add' => true,
+                'allow_delete' => true,
             ])
             ->add('save', SubmitType::class, array('label' => 'create', 'attr' => array('class' => 'btn btn-success')))
             ;
