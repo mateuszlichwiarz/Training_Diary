@@ -17,13 +17,20 @@
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
             $builder
-            ->add('name',        textType::class,     array('attr' => array('class' => 'form-control')))
-            ->add('exercises', CollectionType::class, [
+            ->add('name', textType::class, [
+                    'attr' => ['class' => 'form-control'],
+                    'label' => false
+                    ],
+            )
+            ->add('exercises',  CollectionType::class, [
                 'entry_type' => TextType::class,
                 'entry_options' => [
                     'attr' => ['class' => 'form-control'],
+                    'label' => false
                 ],
                 'allow_add' => true,
-            ]);
+            ])
+            ->add('save', SubmitType::class, array('label' => 'create', 'attr' => array('class' => 'btn btn-success')))
+            ;
         }
     }
