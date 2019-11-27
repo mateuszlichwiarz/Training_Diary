@@ -7,7 +7,10 @@
     <h1>New Trening</h1>
     <p>W tym miejscu możesz ustawić ćwiczenia</p>
     {{ form_start(form) }}
-
+        {{ form_row(form.name) }}
+    <br><br>
+        Exercises:
+        <br>
     <ul id="exercise-fields-list"
         data-prototype="{{ form_widget(form.exercises.vars.prototype)|e }}"
         data-widget-tags="{{ '<li></li>'|e }}"
@@ -34,5 +37,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="/js/main.js"></script>
+    <script src="/js/add-collection-widget.js"></script>
 {% endblock %}
