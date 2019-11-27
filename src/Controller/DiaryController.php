@@ -2,6 +2,10 @@
 
     namespace App\Controller;
 
+    use App\Entity\ProgramTrening;
+    
+    use App\Form\Type\NewType;
+
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,6 +34,24 @@
          */
         public function new() {
             
-            return $this->render('diary/new.html.twig');
+            $plan = new ProgramTrening();
+
+            $form = $this->createForm(NewType::class, $plan, [
+                'method' => 'POST'
+            ]);
+
+            if($form->isSubmitted() && $form->isValid()) {
+                $plan = $form->getData();
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($plan);
+                $entityManager->flush();
+
+                return $this->Redirect('/login/{$slug}');
+            }
+
+            return $this->render('diary/new.html.twig', array(
+                'form' => $form->createView()
+            ));
         }
     }

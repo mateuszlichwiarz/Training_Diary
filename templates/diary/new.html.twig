@@ -6,8 +6,33 @@
     <br>
     <h1>New Trening</h1>
     <p>W tym miejscu możesz ustawić ćwiczenia</p>
+    {{ form_start(form) }}
 
+    <ul id="exercise-fields-list"
+        data-prototype="{{ form_widget(form.exercises.vars.prototype)|e }}"
+        data-widget-tags="{{ '<li></li>'|e }}"
+        data-widget-counter="{{ form.exercises|length }}">
+
+    {% for exerciseField in form.exercises %}
+        <li>
+            {{ form_errors(exerciseField) }}
+            {{ form_widget(exerciseField) }}
+        </li>
+    {% endfor %}
+    </ul>
+
+    <button type="button"
+        class="add-another-collection-widget btn btn-primary"
+        data-list-selector="#exercise-fields-list">
+        Add another exercise
+        </button>
+
+    {{ form_end(form) }}
     
     <br>
     <a class="btn btn-danger" href="/login/{$slug}">Cancel</a>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/main.js"></script>
 {% endblock %}
