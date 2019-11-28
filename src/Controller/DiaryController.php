@@ -3,7 +3,8 @@
     namespace App\Controller;
 
     use App\Entity\ProgramTrening;
-    
+    use App\Entity\User;
+
     use App\Form\Type\NewType;
 
     use Symfony\Component\HttpFoundation\Request;
@@ -32,13 +33,19 @@
         /**
          * @Rest\Post("/{$slug}/new", name="app_new")
          */
-        public function new() {
-            
+        public function new(Request $request) {
+
+            $user = $this->getUser();
+            $id = $user->getId();
+
             $plan = new ProgramTrening();
+            $plan->setUser($id);
 
             $form = $this->createForm(NewType::class, $plan, [
                 'method' => 'POST'
             ]);
+
+            $form->handleRequest($request);
 
             if($form->isSubmitted() && $form->isValid()) {
                 $plan = $form->getData();

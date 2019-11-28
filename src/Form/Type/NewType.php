@@ -23,6 +23,7 @@
                     ],
             )
             ->add('exercises',  CollectionType::class, [
+                'label' => false,
                 'entry_type' => TextType::class,
                 'entry_options' => [
                     'attr' => ['class' => 'form-control'],
