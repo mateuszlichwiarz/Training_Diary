@@ -27,7 +27,14 @@
          */
         public function index() {
 
-            return $this->render('diary/index.html.twig');
+            $user = $this->getUser();
+            $id = $user->getId();
+
+            $currentPlan = $this->getDoctrine()->getRepository(ProgramTrening::class)->findOneBy(['user' => $id]);
+
+            return $this->render('diary/index.html.twig', [
+                'plan' => $currentPlan
+            ]);
         }
 
         /**

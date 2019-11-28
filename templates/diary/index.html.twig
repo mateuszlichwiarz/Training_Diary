@@ -8,6 +8,34 @@
 
     <h4> Hello, {{ app.user.username }}</h4>
 
+
+    <br>
+    <br>
+    <h3>Today trening (thursday)</h3>
+    <br>
+
+    {% if plan %}
+        
+        <h2>{{ plan.name }}</h2>
+
+        <table id="Exercises" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Exercise</th>
+                    <th>Weight</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exercise in plan.exercises %}
+                    <tr>
+                        <td> {{ exercise }}</td>
+                        <td> 0 </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% endif %}
     <br> 
 
 {% endblock %}
