@@ -23,7 +23,7 @@
     class DiaryController extends AbstractController
     {
         /**
-         * @Route("/{$slug}", name="app_homepage")
+         * @Route("/{}", name="app_homepage")
          */
         public function index() {
 
