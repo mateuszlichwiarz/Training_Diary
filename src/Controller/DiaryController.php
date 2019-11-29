@@ -4,6 +4,7 @@
 
     use App\Entity\ProgramTrening;
     use App\Entity\User;
+    use App\Entity\Progres;
 
     use App\Form\Type\NewType;
 
@@ -25,12 +26,39 @@
         /**
          * @Route("/{}", name="app_homepage")
          */
-        public function index() {
+        public function index(Request $request) {
 
             $user = $this->getUser();
             $id = $user->getId();
 
             $currentPlan = $this->getDoctrine()->getRepository(ProgramTrening::class)->findOneBy(['user' => $id]);
+
+            if(isset($POST['weight']) && isset($POST['sets']) && isset($POST['reps'])){
+
+                $weight = $POST['weight'];
+                $sets = $POST['sets'];
+                $reps = $POST['reps'];
+
+                $add = new Progres();
+                $add->setUser($id);
+                $add->setDay('friday');
+                $add->setWeight($weight);
+                $add->setSets($sets);
+                $add->setReps($reps);
+
+                $form->handleRequest($request);
+
+                if($form->isSubmitted() && $form->isValid()) {
+                    $plan = $form->getData();
+
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($plan);
+                    $entityManager->flush();
+
+                    return $this->Redirect('/login/{$slug}');
+                }
+                
+            }
 
             return $this->render('diary/index.html.twig', [
                 'plan' => $currentPlan
