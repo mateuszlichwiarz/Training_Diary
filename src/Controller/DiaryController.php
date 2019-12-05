@@ -142,8 +142,31 @@
             return $this->render('diary/index.html.twig', [
                 'plan' => $plan,
                 'exercises' => $property2,
-                'somethings' => $something
+                'somethings' => $something,
+                'day' => $day,
+                'progres' => $progres
             ]);
+        }
+
+        /**
+         * @Rest\Delete("/{}/{id}", name="app_delete_workout")
+         */
+        public function delete(Request $request, $id) {
+
+            $time = new Time();
+            $day = $time->getDay();
+
+            $exercise = $this->getDoctrine()->getRepository(Progres::class)->findOneBy(['id' => $id,'day' => $day]);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($exercise);
+            $entityManager->flush();
+
+            $response = new Response();
+            $response->send();
+
+            return $this->redirect('/login/{}');
+            
         }
 
 
