@@ -31,6 +31,16 @@ class ProgramTrening
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date;
+
+    /**
+     * @ORM\Column(type="time")
+     */
+    private $time;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +78,30 @@ class ProgramTrening
     public function setUser(string $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getTime(): ?\DateTimeInterface
+    {
+        return $this->time;
+    }
+
+    public function setTime(\DateTimeInterface $time): self
+    {
+        $this->time = $time;
 
         return $this;
     }
