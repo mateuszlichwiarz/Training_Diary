@@ -34,118 +34,136 @@
             $id = $user->getId();
 
             $plan = $this->getDoctrine()->getRepository(ProgramTrening::class)->findOneBy(['user' => $id]);
-            $exercises = $plan->getExercises();
 
-            $time = new Time();
-            $day = $time->getDay();
+            if($plan == true){
 
-            $property = [];
+                $exercises = $plan->getExercises();
 
-            $something = [];
+                $time = new Time();
+                $day = $time->getDay();
 
-            $i = 0;
+                $property = [];
 
-            $progres = $this->getDoctrine()->getRepository(Progres::class)->findBy(['user' => $id, 'day' => $day]);
+                $something = [];
 
-            foreach($progres as $item3){
+                $i = 0;
 
-                $something[$i] = $progres[$i]->getExercise();
+                $progres = $this->getDoctrine()->getRepository(Progres::class)->findBy(['user' => $id, 'day' => $day]);
 
-                $i++;
-            }
+                foreach($progres as $item3){
 
+                    $something[$i] = $progres[$i]->getExercise();
 
-            $property = (array_diff($exercises,$something));
-
-            $property2 = [];
-
-            while(current($property)){
-                array_push($property2, current($property));
-                next($property);
-            }
-
-
-            if(isset($_POST['exercise']) && isset($_POST['weight']) && isset($_POST['sets']) && isset($_POST['reps'])) {
-                
-                    $weight =   $_POST['weight'];
-                    $sets =     $_POST['sets'];
-                    $reps =     $_POST['reps'];
-                    $exercise = $_POST['exercise'];
-                
-                if($weight == true && $sets == true && $reps == true) {
-                    
-                    $add = new Progres();
-                    $add->setUser($id);
-                    $add->setDay('thursday');
-                    $add->setExercise($exercise);
-                    $add->setWeight($weight);
-                    $add->setSets($sets);
-                    $add->setReps($reps);
-
-                    $entityManager = $this->getDoctrine()->getManager();
-                    $entityManager->persist($add);
-                    $entityManager->flush();
-                    
-                    $message['correct'] = "You add exercise today progres, Excellent!";
-
-                    $property = [];
-
-                    $something = [];
-        
-                    $i = 0;
-                    
-                    $progres = $this->getDoctrine()->getRepository(Progres::class)->findBy(['user' => $id, 'day' => $day]);
-        
-                    foreach($progres as $item3){
-        
-                        $something[$i] = $progres[$i]->getExercise();
-        
-                        $i++;
-                    }
-        
-        
-                    $property = (array_diff($exercises,$something));
-        
-                    $property2 = [];
-        
-                    while(current($property)){
-                        array_push($property2, current($property));
-                        next($property);
-                    }
-
-
-
-                    return $this->render('diary/index.html.twig', [
-                        'plan' => $plan,
-                        'message' => $message,
-                        'exercises' => $property2,
-                        'progres' => $progres
-                    ]);
-                    
-
-                } else {
-
-                    $message['error'] = "Please fill fields!";
-
-                    return $this->render('diary/index.html.twig', [
-                        'plan' => $plan,
-                        'message' => $message,
-                        'exercises' => $property2,
-                        'progres' => $progres
-                    ]);
-                    
-
+                    $i++;
                 }
-                
-            }
 
-            return $this->render('diary/index.html.twig', [
-                'plan' => $plan,
-                'exercises' => $property2,
-                'somethings' => $something,
-                'day' => $day,
-                'progres' => $progres
-            ]);
+
+                $property = (array_diff($exercises,$something));
+
+                $property2 = [];
+
+                while(current($property)){
+                    array_push($property2, current($property));
+                    next($property);
+                }
+
+
+                if(isset($_POST['exercise']) && isset($_POST['weight']) && isset($_POST['sets']) && isset($_POST['reps'])) {
+                    
+                        $weight =   $_POST['weight'];
+                        $sets =     $_POST['sets'];
+                        $reps =     $_POST['reps'];
+                        $exercise = $_POST['exercise'];
+                    
+                    if($weight == true && $sets == true && $reps == true) {
+                        
+                        $add = new Progres();
+                        $add->setUser($id);
+                        $add->setDay($day);
+                        $add->setExercise($exercise);
+                        $add->setWeight($weight);
+                        $add->setSets($sets);
+                        $add->setReps($reps);
+
+                        $entityManager = $this->getDoctrine()->getManager();
+                        $entityManager->persist($add);
+                        $entityManager->flush();
+                        
+                        $message['correct'] = "You add exercise today progres, Excellent!";
+
+                        $property = [];
+
+                        $something = [];
+            
+                        $i = 0;
+                        
+                        $progres = $this->getDoctrine()->getRepository(Progres::class)->findBy(['user' => $id, 'day' => $day]);
+            
+                        foreach($progres as $item3){
+            
+                            $something[$i] = $progres[$i]->getExercise();
+            
+                            $i++;
+                        }
+            
+            
+                        $property = (array_diff($exercises,$something));
+            
+                        $property2 = [];
+            
+                        while(current($property)){
+                            array_push($property2, current($property));
+                            next($property);
+                        }
+
+
+
+                        return $this->render('diary/index.html.twig', [
+                            'plan' => $plan,
+                            'message' => $message,
+                            'exercises' => $property2,
+                            'progres' => $progres
+                        ]);
+                        
+
+                    } else {
+
+                        $message['error'] = "Please fill fields!";
+
+                        return $this->render('diary/index.html.twig', [
+                            'plan' => $plan,
+                            'message' => $message,
+                            'exercises' => $property2,
+                            'progres' => $progres
+                        ]);
+                        
+
+                    }
+
+                    
+                }
+
+                return $this->render('diary/index.html.twig', [
+                    'plan' => $plan,
+                    'exercises' => $property2,
+                    'somethings' => $something,
+                    'day' => $day,
+                    'progres' => $progres,
+                ]);
+
+
+            }else{
+        
+                
+                $message['info'] = "Create your new workout, click here!";
+
+                return $this->render('diary/index.html.twig', [
+                    'plan' => $plan,
+                    'message' => $message
+                ]);
+            
+            }
+        
         }
 
         /**
