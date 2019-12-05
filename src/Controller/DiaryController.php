@@ -31,42 +31,121 @@
             $user = $this->getUser();
             $id = $user->getId();
 
-            $currentPlan = $this->getDoctrine()->getRepository(ProgramTrening::class)->findOneBy(['user' => $id]);
+            $plan = $this->getDoctrine()->getRepository(ProgramTrening::class)->findOneBy(['user' => $id]);
+            $exercises = $plan->getExercises();
 
-            if(isset($POST['weight']) && isset($POST['sets']) && isset($POST['reps'])){
+            $day = 'friday';
 
-                $weight = $POST['weight'];
-                $sets = $POST['sets'];
-                $reps = $POST['reps'];
+            $property = [];
 
-                $add = new Progres();
-                $add->setUser($id);
-                $add->setDay('friday');
-                $add->setWeight($weight);
-                $add->setSets($sets);
-                $add->setReps($reps);
+            $something = [];
 
-                $form->handleRequest($request);
+            $i = 0;
 
-                if($form->isSubmitted() && $form->isValid()) {
-                    $plan = $form->getData();
+            $progres = $this->getDoctrine()->getRepository(Progres::class)->findBy(['user' => $id, 'day' => $day]);
+
+            foreach($progres as $item3){
+
+                $something[$i] = $progres[$i]->getExercise();
+
+                $i++;
+            }
+
+
+            $property = (array_diff($exercises,$something));
+
+            $property2 = [];
+
+            while(current($property)){
+                array_push($property2, current($property));
+                next($property);
+            }
+
+
+            if(isset($_POST['exercise']) && isset($_POST['weight']) && isset($_POST['sets']) && isset($_POST['reps'])) {
+                
+                    $weight =   $_POST['weight'];
+                    $sets =     $_POST['sets'];
+                    $reps =     $_POST['reps'];
+                    $exercise = $_POST['exercise'];
+                
+                if($weight == true && $sets == true && $reps == true) {
+                    
+                    $add = new Progres();
+                    $add->setUser($id);
+                    $add->setDay('thursday');
+                    $add->setExercise($exercise);
+                    $add->setWeight($weight);
+                    $add->setSets($sets);
+                    $add->setReps($reps);
 
                     $entityManager = $this->getDoctrine()->getManager();
-                    $entityManager->persist($plan);
+                    $entityManager->persist($add);
                     $entityManager->flush();
+                    
+                    $message['correct'] = "You add exercise today progres, Excellent!";
 
-                    return $this->Redirect('/login/{$slug}');
+
+
+                    $property = [];
+
+                    $something = [];
+        
+                    $i = 0;
+                    
+                    $progres = $this->getDoctrine()->getRepository(Progres::class)->findBy(['user' => $id, 'day' => $day]);
+        
+                    foreach($progres as $item3){
+        
+                        $something[$i] = $progres[$i]->getExercise();
+        
+                        $i++;
+                    }
+        
+        
+                    $property = (array_diff($exercises,$something));
+        
+                    $property2 = [];
+        
+                    while(current($property)){
+                        array_push($property2, current($property));
+                        next($property);
+                    }
+
+
+
+                    return $this->render('diary/index.html.twig', [
+                        'plan' => $plan,
+                        'message' => $message,
+                        'exercises' => $property2,
+                    ]);
+                    
+
+                } else {
+
+                    $message['error'] = "Please fill fields!";
+
+                    return $this->render('diary/index.html.twig', [
+                        'plan' => $plan,
+                        'message' => $message,
+                        'exercises' => $property2
+                    ]);
+                    
+
                 }
                 
             }
 
             return $this->render('diary/index.html.twig', [
-                'plan' => $currentPlan
+                'plan' => $plan,
+                'exercises' => $property2,
+                'somethings' => $something
             ]);
         }
 
+
         /**
-         * @Rest\Post("/{$slug}/new", name="app_new")
+         * @Rest\Post("/{}/new", name="app_new")
          */
         public function new(Request $request) {
 
@@ -89,7 +168,7 @@
                 $entityManager->persist($plan);
                 $entityManager->flush();
 
-                return $this->Redirect('/login/{$slug}');
+                return $this->Redirect('/login/{}');
             }
 
             return $this->render('diary/new.html.twig', array(

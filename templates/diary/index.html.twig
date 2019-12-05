@@ -12,6 +12,46 @@
     <br>
     <br>
     <h3>Today trening (thursday)</h3>
+
+    <p>First loop</p>
+    
+    {% if something is defined %}
+        {% for something in somethings %}
+
+            {{ something }}
+
+        {% endfor %}
+    {% endif %}
+
+    <br>
+    <br>
+
+    <p>Comparison</p>
+    {% if something is defined %}
+        {% for exercise in exercises %}
+
+            {{ exercise }}
+
+        {% endfor %}
+    {% endif %}
+
+    
+
+    {% if message is defined %}
+
+    {% if message.error is defined %}
+
+    <h4 style='color: red;'> {{ message.error }}</h4>
+
+    {% endif %}
+
+    {% if message.correct is defined %}
+
+    <h4 style='color: green;'> {{ message.correct }}</h4>
+
+    {% endif %}
+
+    {% endif %}
     <br>
 
     {% if plan %}
@@ -29,10 +69,10 @@
                 </tr>
             </thead>
             <tbody>
-                {% for exercise in plan.exercises %}
+                {% for exercise in exercises %}
                     <tr>
                         <td> {{ exercise }}</td>
-                        <form method="POST" action="/login/{}">
+                        <form method="POST" id="form"."{{ loop.index0 }}" action="/login/{}">
 
                             <td>
                                 <div class="row">
@@ -59,6 +99,7 @@
                             </td>
 
                             <td> 
+                                <input type="hidden" name="exercise" id="exercise" value="{{ exercise }}"/>
                                 <input type="submit" class="btn btn-success" value="Setup"/>
                             </td>
                         </form>

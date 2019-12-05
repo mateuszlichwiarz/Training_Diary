@@ -8,10 +8,10 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/food">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ path('app_homepage') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <form method="POST" action="/login/{$slug}/new">
+                    <form method="POST" action="/login/{}/new">
                     <button type="submit" class="btn btn-link nav-link">New</button>
                     </form>
                 </li>
