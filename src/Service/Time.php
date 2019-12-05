@@ -17,6 +17,13 @@
             
         }
 
+        public function getDate()
+        {
+            $date = date("Y-m-d");
+
+            return $date;
+        }
+
 
         private function explificationEnd($day)
         {
