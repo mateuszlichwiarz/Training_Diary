@@ -11,30 +11,11 @@
 
     <br>
     <br>
-    <h3>Today trening (thursday)</h3>
+    {% if day is defined %}
 
-    <p>First loop</p>
-    
-    {% if something is defined %}
-        {% for something in somethings %}
+    <h3>Today workout ({{ day }})</h3>
 
-            {{ something }}
-
-        {% endfor %}
     {% endif %}
-
-    <br>
-    <br>
-
-    <p>Comparison</p>
-    {% if something is defined %}
-        {% for exercise in exercises %}
-
-            {{ exercise }}
-
-        {% endfor %}
-    {% endif %}
-
     
 
     {% if message is defined %}
@@ -125,6 +106,7 @@
                         </form>
                     </tr>
                 {% endfor %}
+                {% endif %}
             </tbody>
         </table>
 
