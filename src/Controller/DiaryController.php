@@ -8,6 +8,8 @@
 
     use App\Form\Type\NewType;
 
+    use App\Service\Time;
+
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,7 +36,8 @@
             $plan = $this->getDoctrine()->getRepository(ProgramTrening::class)->findOneBy(['user' => $id]);
             $exercises = $plan->getExercises();
 
-            $day = 'friday';
+            $time = new Time();
+            $day = $time->getDay();
 
             $property = [];
 
@@ -85,8 +88,6 @@
                     
                     $message['correct'] = "You add exercise today progres, Excellent!";
 
-
-
                     $property = [];
 
                     $something = [];
@@ -118,6 +119,7 @@
                         'plan' => $plan,
                         'message' => $message,
                         'exercises' => $property2,
+                        'progres' => $progres
                     ]);
                     
 
@@ -128,7 +130,8 @@
                     return $this->render('diary/index.html.twig', [
                         'plan' => $plan,
                         'message' => $message,
-                        'exercises' => $property2
+                        'exercises' => $property2,
+                        'progres' => $progres
                     ]);
                     
 

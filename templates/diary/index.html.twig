@@ -69,6 +69,26 @@
                 </tr>
             </thead>
             <tbody>
+                {% if progres is defined %}
+                {% for item in progres %}
+                <div id="edititem">
+                    <tr>
+                        <td> {{ item.exercise }} </td>
+                        <td> {{ item.weight }} </td>
+                        <td> {{ item.sets }} </td>
+                        <td> {{ item.reps }} </td>
+                        <td>
+                            <form method="POST" action="/login/{}/{{ item.id }}">
+                                <input type="hidden" name="_method" value="DELETE"/>
+                                <input type="submit" class="btn btn-danger" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                {% if exercises is defined %}
                 {% for exercise in exercises %}
                     <tr>
                         <td> {{ exercise }}</td>
