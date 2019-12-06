@@ -19,9 +19,16 @@
 
         public function getDate()
         {
-            $date = date("Y-m-d");
+            $date = date("Y-m-d H:i:s");
 
             return $date;
+        }
+
+        public function getTime()
+        {
+            $time = date("H:i:s");
+
+            return $time;
         }
 
 

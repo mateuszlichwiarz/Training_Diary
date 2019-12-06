@@ -196,8 +196,15 @@
             $user = $this->getUser();
             $id = $user->getId();
 
+            $datetime = new Time();
+            $time = $datetime->getTime();
+
+            $date = new \DateTime('@'.strtotime('now'));
+
             $plan = new ProgramTrening();
             $plan->setUser($id);
+            $plan->setDate($date);
+            $plan->setTime($date);
 
             $form = $this->createForm(NewType::class, $plan, [
                 'method' => 'POST'
