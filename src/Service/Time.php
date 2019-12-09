@@ -6,6 +6,16 @@
     class Time
     {
 
+        public function dateFromAgo($howLong)
+        {
+            $currentDate = $this->getDate();
+
+            $interestedDate = $currentDate->modify("-".$howLong." day")->format('Y-m-d');
+            
+
+            return $interestedDate;
+        }
+
         public function getDay()
         {
             $date = date("D");
@@ -19,7 +29,7 @@
 
         public function getDate()
         {
-            $date = date("Y-m-d H:i:s");
+            $date = new \DateTime('@'.strtotime('now'));
 
             return $date;
         }

@@ -197,9 +197,7 @@
             $id = $user->getId();
 
             $datetime = new Time();
-            $time = $datetime->getTime();
-
-            $date = new \DateTime('@'.strtotime('now'));
+            $date = $datetime->getDate();
 
             $plan = new ProgramTrening();
             $plan->setUser($id);
