@@ -21,8 +21,16 @@
         /**
          * @Rest\Get("/", name="app_menu");
          */
-        public function menu() {
+        public function menu(Request $request) {
+            
+            return $this->render('menu/menu.html.twig');
+        }
 
-            return new Response("hello");
+        /**
+         * @Rest\Post("/", name="app_postmenu");
+         */
+        public function postmenu(Request $request) {
+            
+            return $this->render('menu/menu.html.twig');
         }
     }
