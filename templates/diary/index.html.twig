@@ -130,6 +130,42 @@
         </table>
 
     {% endif %}
+
+    <br><br><br><br><br>
+
+    {% if workouts is defined %}
+        <div class="previous_workouts">
+
+            <h4>Previous Workouts(7 days ago)</h4>
+
+            <table id="workouts" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date(day)</th>
+                        <th>Exercise</th>
+                        <th>Weight</th>
+                        <th>Sets</th>
+                        <th>reps</th>
+                    </tr>
+                </thead>
+        {% for workout in workouts|reverse %}
+                
+                <tbody>
+                    <tr>
+                        <td>{{ workout.date|date("Y-m-d") }}({{ workout.day }})</td>
+                        <td>{{ workout.exercise }}</td>
+                        <td>{{ workout.weight }}</td>
+                        <td>{{ workout.sets }}</td>
+                        <td>{{ workout.reps }}</td>
+                    </tr>
+                </tbody>
+
+        {% endfor %}
+
+            </table>
+        </div>
+
+    {% endif %}
     <br> 
 
 {% endblock %}
