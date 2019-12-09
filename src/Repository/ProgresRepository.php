@@ -19,6 +19,21 @@ class ProgresRepository extends ServiceEntityRepository
         parent::__construct($registry, Progres::class);
     }
 
+    /**
+      * @return Progres[] Returns an array of Progres objects
+     */
+    public function findAllWantedWorkouts($date, $user)
+    {
+
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.user = :user')
+            ->setParameter('user', $user)
+            ->andWhere('p.date >= :date')
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Progres[] Returns an array of Progres objects
     //  */
