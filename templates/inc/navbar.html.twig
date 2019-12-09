@@ -15,14 +15,8 @@
                     <button type="submit" class="btn btn-link nav-link">New</button>
                     </form>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Menu</a>
-                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);">
-                        <a class="dropdown-item" href="/admin/food/pizza">Pizza</a>
-                        <a class="dropdown-item" href="/admin/food/burger">Burger</a>
-                        <a class="dropdown-item" href="/admin/food/salad">Salad</a>
-                        <a class="dropdown-item" href="/admin/food/others">Others</a>
-                    </div>
+               <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_menu') }}">Menu <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/food/about">About</a>
