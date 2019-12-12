@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Settings{% endblock %}
+
+{% block body %}
+
+    <br><br>
+    <div class="alert alert-dismissible alert-info">
+        <strong>Change how meny days earlier show workouts (default 7 days) </strong>
+    </div>
+
+    <br><br><br>
+
+    <div class="options">
+        <div class="homepage_options">
+            
+            <table class="table table-hover">
+                <tr class="table-primary">
+                    <td>
+
+                    </td>
+                </tr>
+            </table>
+    </div>
+
+    <br><br>
+    <a class="btn btn-danger" href="{{ path('app_section_seting',{'id': 3}) }}">Back</a>
+
+{% endblock %}

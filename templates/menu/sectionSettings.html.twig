@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Settings{% endblock %}
+
+{% block body %}
+
+    <br><br>
+    <h3>Homepage setting:</h3>
+
+    <br><br><br>
+
+    <div class="options">
+        <div class="homepage_options">
+            
+            <table class="table table-hover">
+                <tr class="table-primary">
+                    <td>
+                    <form method="post" action="/login/{}/settings/3">
+                         <input type="hidden" name="_method" value="put" />
+                         <button type="submit" class="btn btn-link nav-link">Change how meny days earlier show workouts</button>
+                    </form>
+                    </td>
+                </tr>
+            </table>
+    </div>
+
+    <br><br>
+    <a class="btn btn-danger" href="{{ path('app_settings') }}">Back</a>
+
+{% endblock %}

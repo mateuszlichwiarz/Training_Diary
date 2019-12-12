@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Settings{% endblock %}
+
+{% block body %}
+
+    <br><br>
+    <h3>Settings</h3>
+
+    <br>
+
+    <h5>Choose section:</h5>
+    <br><br><br>
+
+    <div class="options">
+        <div class="homepage_options">
+            
+            <table class="table table-hover">
+
+                <tr>
+                    <td> <a href="/login/{}/settings/1">Homepage</a> </td>
+                </tr>
+                <tr>
+                    <td> <a href="/login/{}/settings/2">Your account </a> </td>
+                </tr>
+                <tr>
+                    <td> <a href="/login/{}/settings/3">Your training </a> </td>
+                </tr>
+
+            </table>
+    </div>
+
+    <br><br>
+    <a class="btn btn-danger" href="{{ path('app_homepage') }}">Back</a>
+
+{% endblock %}
