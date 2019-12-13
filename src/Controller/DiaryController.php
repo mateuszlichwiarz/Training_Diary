@@ -34,7 +34,10 @@
             $user = $this->getUser();
             $id = $user->getId();
 
+            $homepageSettings = $user->getHomepagesettings();
+
             $plan = $this->getDoctrine()->getRepository(ProgramTrening::class)->findOneBy(['user' => $id]);
+            
 
             if($plan == true){
 
@@ -53,7 +56,7 @@
 
                 $i = 0;
 
-                $progres = $this->getDoctrine()->getRepository(Progres::class)->findBy(['user' => $id, 'day' => $day]);
+                $progres = $this->getDoctrine()->getRepository(Progres::class)->findBy(['user' => $id, 'day' => $day, 'date' => $date]);
 
                 foreach($progres as $item3){
 
@@ -107,7 +110,7 @@
             
                         $i = 0;
                         
-                        $progres = $this->getDoctrine()->getRepository(Progres::class)->findBy(['user' => $id, 'day' => $day]);
+                        $progres = $this->getDoctrine()->getRepository(Progres::class)->findBy(['user' => $id, 'day' => $day, 'date' => $date]);
             
                         foreach($progres as $item3){
             
@@ -138,7 +141,8 @@
                             'message' => $message,
                             'exercises' => $property2,
                             'progres' => $progres,
-                            'workouts' => $workouts
+                            'workouts' => $workouts,
+                            'homepageSettings' => $homepageSettings,
                         ]);
                         
 
@@ -151,7 +155,8 @@
                             'message' => $message,
                             'exercises' => $property2,
                             'progres' => $progres,
-                            'workouts' => $workouts
+                            'workouts' => $workouts,
+                            'homepageSettings' => $homepageSettings,
                         ]);
                         
 
@@ -167,6 +172,7 @@
                     'day' => $day,
                     'progres' => $progres,
                     'workouts' => $workouts,
+                    'homepageSettings' => $homepageSettings,
                 ]);
 
 
