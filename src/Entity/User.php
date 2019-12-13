@@ -33,6 +33,12 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\HomepageSettings", inversedBy="user")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $homepagesettings;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -109,5 +115,17 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getHomepagesettings(): ?HomepageSettings
+    {
+        return $this->homepagesettings;
+    }
+
+    public function setHomepagesettings(?HomepageSettings $homepagesettings): self
+    {
+        $this->homepagesettings = $homepagesettings;
+
+        return $this;
     }
 }
