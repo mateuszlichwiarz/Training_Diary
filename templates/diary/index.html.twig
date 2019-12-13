@@ -136,7 +136,15 @@
     {% if workouts is defined %}
         <div class="previous_workouts">
 
-            <h4>Previous Workouts(7 days ago)</h4>
+            {% if homepageSettings.daysEarlier == 1 %}
+            
+            <h4>Previous Workouts(one day)</h4>
+
+            {% else %}
+
+            <h4>Previous Workouts({{ homepageSettings.daysEarlier }} days)</h4>
+
+            {% endif %}
 
             <table id="workouts" class="table table-striped">
                 <thead>
@@ -148,7 +156,7 @@
                         <th>reps</th>
                     </tr>
                 </thead>
-        {% for workout in workouts|reverse %}
+        {% for workout in workouts %}
                 
                 <tbody>
                     <tr>
