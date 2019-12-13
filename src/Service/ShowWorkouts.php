@@ -24,25 +24,26 @@
         {
 
             $date = new Time();
-            $interestedDate =$date->dateFromAgo($howLong);
+            $interestedDate = $date->dateFromAgo($howLong);
 
 
-            $properties = $this->getPropertiesWorkouts($user, $interestedDate);
+            $properties = $this->getPropertiesWorkouts($user, $interestedDate, $currentdate);
 
             return $properties;
             
         }
 
-        private function getPropertiesWorkouts($user, $interestedDate)
+        private function getPropertiesWorkouts($user, $interestedDate, $currentdate)
         {
 
             $i = 0;
-
             $workouts = array();
+
+            $todaydate = $currentdate->format('Y-m-d');
 
             $workouts = $this->em
                 ->getRepository(Progres::class)
-                ->findAllWantedWorkouts($interestedDate, $user);
+                ->findAllWorkoutsWithoutToday($interestedDate, $user, $todaydate);
 
             if($workouts == true){    
                 foreach($workouts as $workout) {
