@@ -41,9 +41,18 @@
         /**
          * @Rest\Get("/{id}/subsettings/", name="app_section_seting");
          */
-        public function sectionSettings(Request $request) {
+        public function sectionSettings(Request $request, $id) {
+
+            $allSetings = $this->getDoctrine()->getRepository(AllSettings::class)->findOneBy(['id' => $id]);
+
+            $subSettings = $allSetings->getSubSettings();
             
-            return $this->render('menu/sectionSettings.html.twig');
+
+            
+            return $this->render('menu/sectionSettings.html.twig', [
+                'subSettings' => $subSettings,
+                'idSeting' => $id,
+            ]);
         }
 
         /**
