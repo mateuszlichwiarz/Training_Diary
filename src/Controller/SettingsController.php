@@ -39,7 +39,7 @@
         }
 
         /**
-         * @Rest\Get("/{id}", name="app_section_seting");
+         * @Rest\Get("/{id}/subsettings/", name="app_section_seting");
          */
         public function sectionSettings(Request $request) {
             
@@ -47,7 +47,7 @@
         }
 
         /**
-         * @Rest\Put("/{id}", name="app_edit_seting")
+         * @Rest\Put("/{id}/subsettings/{subid}", name="app_edit_seting")
          */
         public function editSeting(Request $request) {
 
