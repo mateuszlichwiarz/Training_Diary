@@ -5,25 +5,50 @@
 {% block body %}
 
     <br><br>
-    <div class="alert alert-dismissible alert-info">
-        <strong>Change how meny days earlier show workouts (default 7 days) </strong>
-    </div>
+    <h4>Change how meny days earlier show workouts (default 7 days)</h4>
+    <p>Set 0 to off </p>
 
     <br><br><br>
 
-    <div class="options">
-        <div class="homepage_options">
+    {% if message is defined %}
+    
+        <div class="message">
+
+            {% if message.correct is defined %}
             
-            <table class="table table-hover">
-                <tr class="table-primary">
-                    <td>
+                <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>{{ message.correct }}</strong>
+                </div>
 
-                    </td>
-                </tr>
-            </table>
+            {% endif %}
+
+            {% if message.error is defined %}
+            
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>{{ message.error }}</strong>
+                </div>
+                
+            {% endif %}
+
+
+        </div>
+
+    {% endif %}
+
+    {{ form_start(form) }}
+
+    
+    <div class="col-md-2">
+        {{ form_row(form.daysEarlier) }}
     </div>
-
     <br><br>
-    <a class="btn btn-danger" href="{{ path('app_section_seting',{'id': 3}) }}">Back</a>
+        {{ form_row(form.save) }}
+
+    {{ form_end(form) }}
+
+    <br>
+    <a class="btn btn-danger" href="{{ path('app_section_seting',{'id': idSeting }) }}">Back</a>
 
 {% endblock %}
