@@ -19,10 +19,10 @@
     class ProgresController extends AbstractController
     {
         /**
-         * @Rest\Get("/login/{}/progres")
+         * @Route("/progres/")
          */
         public function index()
         {
-            return $this->render("");
+            return $this->render("progres/progres.html.twig");
         }
     }
