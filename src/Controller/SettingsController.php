@@ -2,6 +2,12 @@
 
     namespace App\Controller;
 
+    use App\Entity\User;
+    use App\Entity\AllSettings;
+    use App\Entity\HomepageSettings;
+
+    use App\Form\Type\EditSettingsType;
+
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,12 +29,13 @@
          */
         public function settings(Request $request) {
 
-            $user = $this->getUser();
+            $allSettings = $this->getDoctrine()->getRepository(AllSettings::class)->findAll();
+            //$idSettings = $allSettings->getId();
+            //$nameSettings = $allSettings->getName();
             
-            $allSettings = $user->getHomepage();
-
-            
-            return $this->render('menu/settings.html.twig');
+            return $this->render('menu/settings.html.twig', [
+                'allSettings' => $allSettings
+            ]);
         }
 
         /**
