@@ -2,6 +2,12 @@
 
     namespace App\Controller;
 
+    use App\Entity\Progres;
+
+    use App\Service\Time;
+
+    use App\Service\ShowWorkouts;
+
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,8 +27,21 @@
         /**
          * @Route("/progres/")
          */
-        public function index()
-        {
-            return $this->render("progres/progres.html.twig");
+        public function progres(ShowWorkouts $ShowWorkouts)
+        {   
+
+            $user =$this->getUser();
+            $id = $user->getId();
+
+            $time = new Time();
+            $day = $time->getDay();
+            $date = $time->getDate();
+            
+
+            $workouts = $ShowWorkouts->getWorkoutsAll('7', $id, $date);
+    
+            return $this->render("progres/progres.html.twig", [
+                'workouts' => $workouts
+            ]);
         }
     }
