@@ -35,6 +35,7 @@
             $id = $user->getId();
 
             $homepageSettings = $user->getHomepagesettings();
+            $daysEarlier = $homepageSettings->getDaysEarlier();
 
             $plan = $this->getDoctrine()->getRepository(ProgramTrening::class)->findOneBy(['user' => $id]);
             
@@ -47,7 +48,7 @@
                 $day = $time->getDay();
                 $date = $time->getDate();
 
-                $workouts = $ShowWorkouts->getWorkouts('7', $id, $date);
+                $workouts = $ShowWorkouts->getWorkouts($daysEarlier, $id, $date);
                 
 
                 $property = [];
@@ -133,7 +134,7 @@
                         $day = $time->getDay();
                         $date = $time->getDate();
 
-                        $workouts = $ShowWorkouts->getWorkouts('7', $id, $date);
+                        $workouts = $ShowWorkouts->getWorkouts($daysEarlier, $id, $date);
 
 
                         return $this->render('diary/index.html.twig', [
