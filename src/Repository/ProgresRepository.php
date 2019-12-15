@@ -30,6 +30,7 @@ class ProgresRepository extends ServiceEntityRepository
             ->setParameter('user', $user)
             ->andWhere('p.date >= :date')
             ->setParameter('date', $date)
+            ->orderBy('p.date', 'DESC')
             ->getQuery()
             ->getResult();
     }
