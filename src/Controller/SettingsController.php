@@ -58,8 +58,45 @@
         /**
          * @Rest\Put("/{id}/subsettings/{subid}", name="app_edit_seting")
          */
-        public function editSeting(Request $request) {
+        public function editSeting(Request $request, $id, $subid) {
 
-            return $this->render('menu/editSetting.html.twig');
+            $user = $this->getUser();
+
+            $idSettings = $user->getHomepagesettings();
+
+            $userSettings = new HomepageSettings();
+            $userSettings = $this->getDoctrine()->getRepository(HomepageSettings::class)->find($idSettings);
+
+            $form = $this->createForm(EditSettingsType::class, $userSettings, [
+                'method' => 'PUT'
+            ]);
+
+            $form->handleRequest($request);
+
+            if($form->isSubmitted() && $form->isValid()) {
+
+                $userSettings= $form->getData();
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($userSettings);
+                $entityManager->flush();
+
+                
+                $message['correct'] = 'You left changes!';
+
+                return $this->render('menu/editSetting.html.twig', [
+                    'form'     => $form->createView(),
+                    'idSeting' => $id,
+                    'subid'    => $subid,
+                    'message'  => $message,
+                ]);
+
+            }
+
+            return $this->render('menu/editSetting.html.twig', [
+                'form'     => $form->createView(),
+                'idSeting' => $id,
+                'subid'    => $subid
+            ]);
         }
     }
