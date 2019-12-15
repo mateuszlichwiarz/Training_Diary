@@ -143,6 +143,7 @@
                             'progres' => $progres,
                             'workouts' => $workouts,
                             'homepageSettings' => $homepageSettings,
+                            'day' => $day
                         ]);
                         
 
@@ -157,6 +158,7 @@
                             'progres' => $progres,
                             'workouts' => $workouts,
                             'homepageSettings' => $homepageSettings,
+                            'day' => $day
                         ]);
                         
 
