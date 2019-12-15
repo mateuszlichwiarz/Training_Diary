@@ -9,23 +9,19 @@
 
     <br>
 
-    <h5>Choose section:</h5>
     <br><br><br>
 
-    <div class="options">
-        <div class="homepage_options">
-            
+    <div class="settings">
             <table class="table table-hover">
 
+            {% for seting in allSettings %}
                 <tr>
-                    <td> <a href="/login/{}/settings/1">Homepage</a> </td>
+                    <td>
+                        <a class="nav-link" href="/login/{}/settings/{{ seting.id }}/subsettings/">{{ seting.name }}</a> 
+                    </td>
                 </tr>
-                <tr>
-                    <td> <a href="/login/{}/settings/2">Your account </a> </td>
-                </tr>
-                <tr>
-                    <td> <a href="/login/{}/settings/3">Your training </a> </td>
-                </tr>
+
+            {% endfor %}
 
             </table>
     </div>
