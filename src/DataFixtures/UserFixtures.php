@@ -20,7 +20,7 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        for($i = 0; $i < 20; $i++) {
+        for($i = 0; $i < 5; $i++) {
 
             $homepageSettings = new HomepageSettings();
             $homepageSettings->setDaysEarlier(7);
