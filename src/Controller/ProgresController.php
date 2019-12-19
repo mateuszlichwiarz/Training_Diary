@@ -34,14 +34,73 @@
             $id = $user->getId();
 
             $time = new Time();
-            $day = $time->getDay();
+            $today = $time->getDay();
             $date = $time->getDate();
+            $week = $time->getWeekArray();
+            
+            $titleDay = [];
+
+            if($today == 'Monday'){
+
+                foreach($week as $day)
+                {
+                    $workouts[$day] = $ShowWorkouts->getWorkoutsAll('1', $day, $id, $date);
+                }
+                
+            }elseif($today == 'Thuesday'){
+
+                foreach($week as $day)
+                {
+                    $workouts[] = $ShowWorkouts->getWorkoutsAll('2', $day, $id, $date);
+                }
+                
+            }elseif($today == 'Wednesday'){
+
+                foreach($week as $day)
+                {
+                    $titleDay[$day] = $day;
+                    $workouts[$day] = $ShowWorkouts->getWorkoutsAll('3', $day, $id, $date);
+                }
+
+            }elseif($today == 'Thursday'){
+
+                foreach($week as $day)
+                {
+                    $titleDay[$day] = $day;
+                    $workouts[$day] = $ShowWorkouts->getWorkoutsAll('4', $day, $id, $date);
+                }
+
+            }elseif($today == 'Friday'){
+               
+                foreach($week as $day)
+                {
+                    $titleDay[$day] = $day;
+                    $workouts[$day] = $ShowWorkouts->getWorkoutsAll('5', $day, $id, $date);
+                }
+                
+            }elseif($today == 'Saturday'){
+                
+                foreach($week as $day)
+                {
+                    $titleDay[$day] = $day;
+                    $workouts[$day] = $ShowWorkouts->getWorkoutsAll('6', $day, $id, $date);
+                }
+
+            }elseif($today == 'Sunday'){
+                
+                foreach($week as $day)
+                {
+                    $titleDay[$day] = $day;
+                    $workouts[$day] = $ShowWorkouts->getWorkoutsAll('7', $day, $id, $date);
+                }
+
+            }
+            
             
 
-            $workouts = $ShowWorkouts->getWorkoutsAll('7', $id, $date);
     
             return $this->render("progres/progres.html.twig", [
-                'workouts' => $workouts
+                'workouts' => $workouts,
             ]);
         }
     }
