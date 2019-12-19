@@ -42,6 +42,63 @@
 
             return $properties;
         }
+
+        public function getProgres($today, $date, $userId, $week)
+        {
+            if($today == 'Monday'){
+
+                foreach($week as $day)
+                {
+                    $workouts[] = $this->getWorkoutsAll('1', $day, $userId, $date);
+                }
+                
+            }elseif($today == 'Thuesday'){
+
+                foreach($week as $day)
+                {
+                    $workouts[] = $this->getWorkoutsAll('2', $day, $userId, $date);
+                }
+                
+            }elseif($today == 'Wednesday'){
+
+                foreach($week as $day)
+                {
+                    $workouts[] = $this->getWorkoutsAll('3', $day, $userId, $date);
+                }
+
+            }elseif($today == 'Thursday'){
+
+                foreach($week as $day)
+                {
+                    $workouts[] = $this->getWorkoutsAll('4', $day, $userId, $date);
+                }
+
+            }elseif($today == 'Friday'){
+               
+                foreach($week as $day)
+                {
+                    $workouts[] = $this->getWorkoutsAll('5', $day, $userId, $date);
+                }
+                
+            }elseif($today == 'Saturday'){
+                
+                foreach($week as $day)
+                {
+                    $workouts[] = $this->getWorkoutsAll('6', $day, $userId, $date);
+                }
+
+            }elseif($today == 'Sunday'){
+                
+                foreach($week as $day)
+                {
+                    $workouts[] = $this->getWorkoutsAll('7', $day, $userId, $date);
+                }
+
+            }
+
+
+            return $workouts;
+        }
         
 
         private function getPropertiesWorkoutsAll($user, $day, $interestedDate, $currentdate)
