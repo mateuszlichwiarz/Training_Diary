@@ -10,9 +10,14 @@
         {
             $currentDate = $this->getDate();
 
-            $interestedDate = $currentDate->modify("-".$howLong." day")->format('Y-m-d');
+            if($howLong == 0)
+            {
+                $interestedDate = $this->getDate();
+            }else
+            {
+                $interestedDate = $currentDate->modify("-".$howLong." day");
+            }
             
-
             return $interestedDate;
         }
 
