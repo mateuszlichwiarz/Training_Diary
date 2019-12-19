@@ -33,25 +33,25 @@
             
         }
 
-        public function getWorkoutsAll($howLong, $user)
+        public function getWorkoutsAll($howLong, $day, $user, $currentdate)
         {
             $date = new Time();
             $interestedDate = $date->dateFromAgo($howLong);
 
-            $properties = $this->getPropertiesWorkoutsAll($user, $interestedDate);
+            $properties = $this->getPropertiesWorkoutsAll($user,$day, $interestedDate, $currentdate);
 
             return $properties;
         }
         
 
-        private function getPropertiesWorkoutsAll($user, $interestedDate)
+        private function getPropertiesWorkoutsAll($user, $day, $interestedDate, $currentdate)
         {
             $i = 0;
             $workouts = array();
 
             $workouts = $this->em
                 ->getRepository(Progres::class)
-                ->findAllWantedWorkouts($interestedDate, $user);
+                ->findWorkoutsByDay($interestedDate, $day, $user, $currentdate);
 
             if($workouts == true){    
                 foreach($workouts as $workout) {
@@ -72,7 +72,7 @@
 
             }else {
 
-                return 0;
+                return false;
             }
         }
 
@@ -107,7 +107,7 @@
 
             }else {
 
-                return 0;
+                return false;
             }
         }
     }
