@@ -25,13 +25,12 @@
     class ProgresController extends AbstractController
     {
         /**
-         * @Route("/progres/")
+         * @Route("/progres/{id}")
          */
-        public function progres(ShowWorkouts $ShowWorkouts)
+        public function progres(ShowWorkouts $ShowWorkouts, $id)
         {   
-
             $user =$this->getUser();
-            $id = $user->getId();
+            $userId = $user->getId();
 
             $time = new Time();
             $today = $time->getDay();
