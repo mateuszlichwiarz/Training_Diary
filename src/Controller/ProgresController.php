@@ -38,7 +38,7 @@
             $week = $time->getWeekArray();
             
 
-            $workouts = $ShowWorkouts->getProgres($today, $date, $id, $week);
+            $workouts = $ShowWorkouts->getProgres($today, $date, $userId, $week, $id);
 
     
             return $this->render("progres/progres.html.twig", [
