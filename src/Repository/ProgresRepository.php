@@ -22,17 +22,21 @@ class ProgresRepository extends ServiceEntityRepository
     /**
       * @return Progres[] Returns an array of Progres objects
      */
-    public function findAllWantedWorkouts($date, $user)
+    public function findWorkoutsByDay($date, $day, $user, $currentdate)
     {
 
-        return $this->createQueryBuilder('p')
+            return $this->createQueryBuilder('p')
             ->andWhere('p.user = :user')
             ->setParameter('user', $user)
-            ->andWhere('p.date >= :date')
+            ->andWhere('p.date >= :date AND p.date <= :currentdate')
             ->setParameter('date', $date)
-            ->orderBy('p.date', 'DESC')
+            ->setParameter('currentdate', $currentdate)
+            ->andWhere('p.day = :day')
+            ->setParameter('day', $day)
+            ->orderBy('p.date', 'ASC')
             ->getQuery()
             ->getResult();
+        
     }
 
     public function findAllWorkoutsWithoutToday($date, $user, $currentdate)
@@ -40,9 +44,8 @@ class ProgresRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->andWhere('p.user = :user')
             ->setParameter('user', $user)
-            ->andWhere('p.date >= :date')
+            ->andWhere('p.date >= :date AND p.date < :currentdate')
             ->setParameter('date', $date)
-            ->andWhere('p.date != :currentdate')
             ->setParameter('currentdate', $currentdate)
             ->orderBy('p.date', 'DESC')
             ->getQuery()
