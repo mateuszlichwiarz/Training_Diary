@@ -11,16 +11,15 @@
 
 
 
-    {% for titleDay,items in workouts %}
+    {% for items in workouts %}
 
     {% if items == true %}
 
         <div class="progres">
-
+                <h4>{{ items.0.day }} | {{ items.0.date|date("Y-m-d") }} </h4>
             <table id="workout_friday" class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Date(day)</th>
                         <th>Exercise</th>
                         <th>Weight</th>
                         <th>Sets</th>
@@ -29,10 +28,9 @@
                 </thead>
                     
                 {% for workout in items %}
-                    
                 <tbody>
                     <tr>
-                        <td>{{ workout.date|date("Y-m-d") }}({{ workout.day }})</td>
+                        <td>{{ workout.date|date("Y-m-d") }}</td>
                         <td>{{ workout.exercise }}</td>
                         <td>{{ workout.weight }}</td>
                         <td>{{ workout.sets }}</td>
