@@ -21,6 +21,19 @@
             return $interestedDate;
         }
 
+        public function getWeekArray()
+        {
+            $week[] = 'Monday';
+            $week[] = 'Thuesday';
+            $week[] = 'Wednesday';
+            $week[] = 'Thursday';
+            $week[] = 'Friday';
+            $week[] = 'Saturday';
+            $week[] = 'Sunday';
+
+            return $week;
+        }
+
         public function getDay()
         {
             $date = date("D");
