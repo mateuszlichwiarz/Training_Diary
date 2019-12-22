@@ -71,11 +71,10 @@
     
     <div class="changeweek">
         {% if previous == 1 %}
-        
         {% else %}
-        <a class="btn btn-info" href="/login/{}/progres/{{ forward }}"><</a>
+        <a class="btn btn-info" href="/login/{}/progres/{{ forward }}"> < Forward</a>
         {% endif %}
-        <a class="btn btn-info" href="/login/{}/progres/{{ previous }}">></a>
+        <a class="btn btn-info" href="/login/{}/progres/{{ previous }}"> Previous week > </a>
     </div>
 
     <br>

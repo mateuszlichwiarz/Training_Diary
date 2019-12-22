@@ -119,6 +119,7 @@
     
                 }elseif($today == 'Sunday'){
                     
+                    $endDay = $cutDate->modify("+0 day");
                     foreach($week as $day)
                     {
                         $workouts[] = $this->getWorkoutsAll($howLong[6], $day, $userId, $cutDate);
