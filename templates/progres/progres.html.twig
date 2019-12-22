@@ -5,7 +5,24 @@
 {% block body %}
 
     <br><br>
-    <h3>Your progres</h3>
+    {% if previous == 1 %}
+    <h3>Your progres(current week)</h3>
+    {% elseif previous == 2 %}
+    <h3>Your progres(one week ago)</h3>
+    {% elseif previous > 2 %}
+    <h3>Your progres( {{ previous - 1 }} weeks ago)</h3>
+    {% endif %}
+
+    <br>
+
+    <div class="changeweek">
+        {% if previous == 1 %}
+        <a class="btn btn-info" href="/login/{}/progres/{{ previous }}">Previous week > </a>
+        {% else %}
+        <a class="btn btn-info" href="/login/{}/progres/{{ forward }}"><</a>
+        <a class="btn btn-info" href="/login/{}/progres/{{ previous }}">></a>
+        {% endif %}
+    </div>
 
     <br><br><br>
 
@@ -47,10 +64,22 @@
 
     {% endif %}
 
-    <br><br>
+    <br>
 
     {% endfor %}
 
+    
+    <div class="changeweek">
+        {% if previous == 1 %}
+        
+        {% else %}
+        <a class="btn btn-info" href="/login/{}/progres/{{ forward }}"><</a>
+        {% endif %}
+        <a class="btn btn-info" href="/login/{}/progres/{{ previous }}">></a>
+    </div>
+
+    <br>
+    <br>
     <br>
     <a class="btn btn-danger" href="{{ path('app_homepage') }}">Back</a>
 

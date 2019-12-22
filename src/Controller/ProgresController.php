@@ -36,13 +36,20 @@
             $today = $time->getDay();
             $date = $time->getDate();
             $week = $time->getWeekArray();
-            
 
             $workouts = $ShowWorkouts->getProgres($today, $date, $userId, $week, $id);
 
-    
+            $previousWeek = $id + 1;
+            $forward = $id - 1;
+
+            if($forward == -1){
+                $forward = 0;
+            }
+            
             return $this->render("progres/progres.html.twig", [
                 'workouts' => $workouts,
+                'previous' => $previousWeek,
+                'forward'  => $forward,
             ]);
         }
     }
