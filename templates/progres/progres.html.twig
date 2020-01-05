@@ -19,8 +19,8 @@
         {% if previous == 1 %}
         <a class="btn btn-info" href="/login/{}/progres/{{ previous }}">Previous week > </a>
         {% else %}
-        <a class="btn btn-info" href="/login/{}/progres/{{ forward }}"><</a>
-        <a class="btn btn-info" href="/login/{}/progres/{{ previous }}">></a>
+        <a class="btn btn-info" href="/login/{}/progres/{{ forward }}"> < Forward</a>
+        <a class="btn btn-info" href="/login/{}/progres/{{ previous }}">Previous week > </a>
         {% endif %}
     </div>
 
@@ -29,7 +29,6 @@
 
 
     {% for items in workouts %}
-
     {% if items == true %}
 
         <div class="progres">
@@ -40,10 +39,11 @@
                         <th>Exercise</th>
                         <th>Weight</th>
                         <th>Sets</th>
-                        <th>reps</th>
+                        <th>Reps</th>
+                        <th>Volume</th>
                     </tr>
                 </thead>
-                    
+
                 {% for workout in items %}
                 <tbody>
                     <tr>
@@ -51,6 +51,7 @@
                         <td>{{ workout.weight }}</td>
                         <td>{{ workout.sets }}</td>
                         <td>{{ workout.reps }}</td>
+                        <td>{{ workout.volume }}</td>
                     </tr>
                 </tbody>
 
