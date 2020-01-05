@@ -228,7 +228,7 @@
                     $i++;
                 }
 
-
+                
                 return $workoutsProperties;
 
             }else {
