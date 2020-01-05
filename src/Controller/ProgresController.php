@@ -5,7 +5,6 @@
     use App\Entity\Progres;
 
     use App\Service\Time;
-
     use App\Service\ShowWorkouts;
 
     use Symfony\Component\HttpFoundation\Request;

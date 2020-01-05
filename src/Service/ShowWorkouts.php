@@ -6,6 +6,7 @@
     use Doctrine\ORM\EntityManagerInterface;
 
     use App\Service\Time;
+    use App\Service\WorkoutVolume;
 
 
     class ShowWorkouts
@@ -28,6 +29,7 @@
 
 
             $properties = $this->getPropertiesWorkouts($user, $interestedDate, $currentdate);
+            
 
             return $properties;
             
@@ -215,6 +217,14 @@
                     $workoutsProperties[$i]['reps']     = $workouts[$i]->getReps();
                     $workoutsProperties[$i]['weight']   = $workouts[$i]->getWeight();
 
+                    $weight = $workoutsProperties[$i]['weight'];
+                    $sets   = $workoutsProperties[$i]['sets'];
+                    $reps   = $workoutsProperties[$i]['reps'];
+
+                    $wv = new WorkoutVolume();
+
+                    $workoutsProperties[$i]['volume'] = $wv->getVolume($weight, $sets, $reps);
+
                     $i++;
                 }
 
@@ -249,6 +259,14 @@
                     $workoutsProperties[$i]['sets']     = $workouts[$i]->getSets();
                     $workoutsProperties[$i]['reps']     = $workouts[$i]->getReps();
                     $workoutsProperties[$i]['weight']   = $workouts[$i]->getWeight();
+
+                    $weight = $workoutsProperties[$i]['weight'];
+                    $sets   = $workoutsProperties[$i]['sets'];
+                    $reps   = $workoutsProperties[$i]['reps'];
+
+                    $wv = new WorkoutVolume();
+
+                    $workoutsProperties[$i]['volume'] = $wv->getVolume($weight, $sets, $reps);
 
                     $i++;
                 }
