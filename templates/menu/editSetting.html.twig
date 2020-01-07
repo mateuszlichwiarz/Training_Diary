@@ -39,9 +39,12 @@
 
     {{ form_start(form) }}
 
-    
     <div class="col-md-2">
+    {% if homepage is defined %}
         {{ form_row(form.daysEarlier) }}
+    {% else %}
+        {{ form_row(form.weightUnit) }}
+    {% endif %}
     </div>
     <br><br>
         {{ form_row(form.save) }}

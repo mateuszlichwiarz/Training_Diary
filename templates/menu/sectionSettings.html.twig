@@ -13,14 +13,25 @@
         <table class="table table-hover">
 
             {% for subSeting in subSettings %}
-                <tr class="table table-hover">
-                    <td>
-                        <form method="post" action="/login/{}/settings/{{ idSeting }}/subsettings/{{ loop.index0 }}">
-                            <input type="hidden" name="_method" value="put" />
-                            <button type="submit" class="btn btn-link nav-link">Change how meny days earlier show workouts</button>
-                        </form>
-                    </td>
-                </tr>
+                {% if subSeting == 'daysealier'%}
+                    <tr class="table table-hover">
+                        <td>
+                            <form method="post" action="/login/{}/settings/{{ idSeting }}/subsettings/{{ loop.index0 }}">
+                                <input type="hidden" name="_method" value="put" />
+                                <button type="submit" class="btn btn-link nav-link">Change how meny days earlier show workouts</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr class="table table-hover">
+                        <td>
+                            <form method="post" action="/login/{}/settings/{{ idSeting }}/subsettings/{{ loop.index0 }}">
+                                <input type="hidden" name="_method" value="put" />
+                                <button type="submit" class="btn btn-link nav-link">Change weight unit</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endif %}
             {% endfor %}
 
         </table>
