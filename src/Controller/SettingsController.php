@@ -5,6 +5,8 @@
     use App\Entity\User;
     use App\Entity\AllSettings;
     use App\Entity\HomepageSettings;
+    use App\Entity\GeneralSettings;
+
 
     use App\Form\Type\EditSettingsType;
 
@@ -47,7 +49,7 @@
 
             $subSettings = $allSetings->getSubSettings();
             
-
+            print_r($subSettings);
             
             return $this->render('menu/sectionSettings.html.twig', [
                 'subSettings' => $subSettings,
