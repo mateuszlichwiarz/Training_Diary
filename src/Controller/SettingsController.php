@@ -65,13 +65,25 @@
             $user = $this->getUser();
 
             $idSettings = $user->getHomepagesettings();
+            
+            if($id == '26')
+            {
+                $homepageSettings = new HomepageSettings();
+                $homepageSettings = $this->getDoctrine()->getRepository(HomepageSettings::class)->find($idSettings);
 
-            $userSettings = new HomepageSettings();
-            $userSettings = $this->getDoctrine()->getRepository(HomepageSettings::class)->find($idSettings);
+                $form = $this->createForm(EditSettingsType::class, $homepageSettings, [
+                    'method' => 'PUT'
+                ]);
+            }
+            elseif($id == '27')
+            {
+                $generalSettings = new GeneralSettings();
+                $generalSettings = $this->getDoctrine()->getRepository(GeneralSettings::class)->find($idSettings);
 
-            $form = $this->createForm(EditSettingsType::class, $userSettings, [
-                'method' => 'PUT'
-            ]);
+                $form = $this->createForm(EditSettingsType::class, $generalSettings, [
+                    'method' => 'PUT'
+                ]);
+            }
 
             $form->handleRequest($request);
 
