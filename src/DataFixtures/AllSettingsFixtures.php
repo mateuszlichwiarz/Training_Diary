@@ -14,15 +14,23 @@
             // $product = new Product();
             // $manager->persist($product);
             
-            $allSettings = new AllSettings();
-            $allSettings->setName('homepage');
+            $homepageSettings = new AllSettings();
+            $homepageSettings->setName('Homepage');
 
             $subSettings = [];
             $subSettings[0] = 'daysealier';
-            $allSettings->setSubSettings($subSettings);
+            $homepageSettings->setSubSettings($subSettings);
 
-            $manager->persist($allSettings);
+            $manager->persist($homepageSettings);
+
+            $generalSettings = new AllSettings();
+            $generalSettings->setName('General');
+
+            $subSettings = [];
+            $subSettings[0] = 'changeweightunit';
+            $generalSettings->setSubSettings($subSettings);
             
+            $manager->persist($generalSettings);
 
             $manager->flush();
         }
