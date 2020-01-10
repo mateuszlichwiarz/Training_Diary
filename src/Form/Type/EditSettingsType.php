@@ -3,7 +3,7 @@
     namespace App\Form\Type;
 
     use App\Entity\User;
-    use App\Entity\HomepageSetting;
+    use App\Entity\HomepageSettings;
 
     use Symfony\Component\OptionsResolver\OptionsResolver;
     use Symfony\Component\Form\AbstractType;
@@ -26,10 +26,6 @@
                 'label' => false
                 ]
             )
-            ->add('weightUnit', TextType::class, [
-                'attr' => ['class' => 'form-control'],
-                'label' => false
-            ])
             ->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-success')))
             ;
         }
