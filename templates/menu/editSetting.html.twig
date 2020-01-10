@@ -5,8 +5,12 @@
 {% block body %}
 
     <br><br>
-    <h4>Choose how meny days earlier homepage shows workouts</h4>
-    <p>Set 0 to off </p>
+    {% if homepageSettings is defined %}
+        <h4>Choose how meny days earlier homepage shows workouts</h4>
+        <p>Set 0 to off </p>
+    {% elseif generalSettings is defined %}
+        <h4>Choose weight unit(Kg or Ibs)</h4>
+    {% endif %}
 
     <br><br><br>
 
@@ -40,9 +44,9 @@
     {{ form_start(form) }}
 
     <div class="col-md-2">
-    {% if homepage is defined %}
+    {% if homepageSettings is defined %}
         {{ form_row(form.daysEarlier) }}
-    {% else %}
+    {% elseif generalSettings is defined %}
         {{ form_row(form.weightUnit) }}
     {% endif %}
     </div>

@@ -9,6 +9,7 @@
 
 
     use App\Form\Type\EditSettingsType;
+    use App\Form\Type\EditUnitType;
 
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
@@ -68,49 +69,85 @@
             
             if($id == '26')
             {
+                echo $id;
                 $homepageSettings = new HomepageSettings();
                 $homepageSettings = $this->getDoctrine()->getRepository(HomepageSettings::class)->find($idSettings);
 
                 $form = $this->createForm(EditSettingsType::class, $homepageSettings, [
                     'method' => 'PUT'
                 ]);
-            }
-            elseif($id == '27')
-            {
-                $generalSettings = new GeneralSettings();
-                $generalSettings = $this->getDoctrine()->getRepository(GeneralSettings::class)->find($idSettings);
 
-                $form = $this->createForm(EditSettingsType::class, $generalSettings, [
-                    'method' => 'PUT'
-                ]);
-            }
+                $form->handleRequest($request);
 
-            $form->handleRequest($request);
-
-            if($form->isSubmitted() && $form->isValid()) {
-
-                $userSettings= $form->getData();
-
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($userSettings);
-                $entityManager->flush();
-
-                
-                $message['correct'] = 'You left changes!';
-
+                if($form->isSubmitted() && $form->isValid()) {
+    
+                    $homepageSettings= $form->getData();
+    
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($homepageSettings);
+                    $entityManager->flush();
+    
+                    
+                    $message['correct'] = 'You left changes!';
+    
+                    return $this->render('menu/editSetting.html.twig', [
+                        'form'     => $form->createView(),
+                        'idSeting' => $id,
+                        'subid'    => $subid,
+                        'message'  => $message,
+                        'homepageSettings' => $homepageSettings
+                    ]);
+    
+                }
+    
                 return $this->render('menu/editSetting.html.twig', [
                     'form'     => $form->createView(),
                     'idSeting' => $id,
                     'subid'    => $subid,
-                    'message'  => $message,
+                    'homepageSettings' => $homepageSettings
+    
+                ]);
+            }
+            elseif($id == '27')
+            {
+                echo $id;
+                $generalSettings = new GeneralSettings();
+                $generalSettings = $this->getDoctrine()->getRepository(GeneralSettings::class)->find($idSettings);
+
+                $form = $this->createForm(EditUnitType::class, $generalSettings, [
+                    'method' => 'PUT'
                 ]);
 
-            }
+                $form->handleRequest($request);
 
-            return $this->render('menu/editSetting.html.twig', [
-                'form'     => $form->createView(),
-                'idSeting' => $id,
-                'subid'    => $subid
-            ]);
+                if($form->isSubmitted() && $form->isValid()) {
+    
+                    $generalSettings= $form->getData();
+    
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($generalSettings);
+                    $entityManager->flush();
+    
+                    
+                    $message['correct'] = 'You left changes!';
+    
+                    return $this->render('menu/editSetting.html.twig', [
+                        'form'     => $form->createView(),
+                        'idSeting' => $id,
+                        'subid'    => $subid,
+                        'message'  => $message,
+                        'generalSettings' => $generalSettings
+                    ]);
+    
+                }
+    
+                return $this->render('menu/editSetting.html.twig', [
+                    'form'     => $form->createView(),
+                    'idSeting' => $id,
+                    'subid'    => $subid,
+                    'generalSettings' => $generalSettings
+    
+                ]);
+            }
         }
     }
