@@ -22,8 +22,8 @@ class UserFixtures extends Fixture
     {
         for($i = 0; $i < 5; $i++) {
 
-            $homepageSettings = new HomepageSettings();
-            $homepageSettings->setDaysEarlier(7);
+            //$homepageSettings = new HomepageSettings();
+            //$homepageSettings->setDaysEarlier(7);
 
             $user = new User();
             $user->setEmail('user'.$i.'@gmail.com');
@@ -31,9 +31,9 @@ class UserFixtures extends Fixture
                 $user,
                 'password'.$i
             ));
-            $user->setHomepagesettings($homepageSettings);
+            //$user->setHomepagesettings($homepageSettings);
 
-            $manager->persist($homepageSettings);
+            //$manager->persist($homepageSettings);
             $manager->persist($user);
         }
 
