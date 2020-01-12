@@ -3,7 +3,8 @@
     namespace App\Controller;
 
     use App\Entity\Progres;
-
+    use App\Entity\GeneralSettings;
+    
     use App\Service\Time;
     use App\Service\ShowWorkouts;
 
@@ -35,6 +36,12 @@
             $today = $time->getDay();
             $date = $time->getDate();
             $week = $time->getWeekArray();
+
+
+            $settings = new GeneralSettings();
+            $settings = $this->getDoctrine()->getRepository(GeneralSettings::class)->find($userId);
+
+            print_r($settings);
 
             $workouts = $ShowWorkouts->getProgres($today, $date, $userId, $week, $id);
 
