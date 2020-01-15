@@ -17,12 +17,12 @@ class Progres
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=180)
      */
     private $user;
 
     /**
-     * @ORM\Column(type="string", length=32)
+     * @ORM\Column(type="string", length=64)
      */
     private $day;
 
@@ -32,17 +32,17 @@ class Progres
     private $exercise;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
     private $weight;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
-    private $Sets;
+    private $sets;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
     private $reps;
 
@@ -102,7 +102,7 @@ class Progres
         return $this->weight;
     }
 
-    public function setWeight(?int $weight): self
+    public function setWeight(int $weight): self
     {
         $this->weight = $weight;
 
@@ -111,12 +111,12 @@ class Progres
 
     public function getSets(): ?int
     {
-        return $this->Sets;
+        return $this->sets;
     }
 
-    public function setSets(?int $Sets): self
+    public function setSets(int $sets): self
     {
-        $this->Sets = $Sets;
+        $this->sets = $sets;
 
         return $this;
     }
@@ -126,7 +126,7 @@ class Progres
         return $this->reps;
     }
 
-    public function setReps(?int $reps): self
+    public function setReps(int $reps): self
     {
         $this->reps = $reps;
 

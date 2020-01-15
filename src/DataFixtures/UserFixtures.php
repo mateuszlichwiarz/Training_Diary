@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use app\Entity\User;
 use app\Entity\HomepageSettings;
+use app\Entity\GeneralSettings;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -22,8 +23,11 @@ class UserFixtures extends Fixture
     {
         for($i = 0; $i < 5; $i++) {
 
-            //$homepageSettings = new HomepageSettings();
-            //$homepageSettings->setDaysEarlier(7);
+            $homepageSettings = new HomepageSettings();
+            $homepageSettings->setDaysEarlier(7);
+
+            $generalSettings = new GeneralSettings();
+            $generalSettings->setWeightUnit('kg');
 
             $user = new User();
             $user->setEmail('user'.$i.'@gmail.com');
@@ -31,9 +35,11 @@ class UserFixtures extends Fixture
                 $user,
                 'password'.$i
             ));
-            //$user->setHomepagesettings($homepageSettings);
+            $user->setHomepagesettings($homepageSettings);
+            $user->setGeneralsettings($generalSettings);
 
-            //$manager->persist($homepageSettings);
+            $manager->persist($homepageSettings);
+            $manager->persist($generalSettings);
             $manager->persist($user);
         }
 

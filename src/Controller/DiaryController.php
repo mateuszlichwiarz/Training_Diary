@@ -2,7 +2,7 @@
 
     namespace App\Controller;
 
-    use App\Entity\ProgramTrening;
+    use App\Entity\ProgramTraining;
     use App\Entity\User;
     use App\Entity\Progres;
 
@@ -37,7 +37,7 @@
             $homepageSettings = $user->getHomepagesettings();
             $daysEarlier = $homepageSettings->getDaysEarlier();
 
-            $plan = $this->getDoctrine()->getRepository(ProgramTrening::class)->findOneBy(['user' => $id]);
+            $plan = $this->getDoctrine()->getRepository(ProgramTraining::class)->findOneBy(['user' => $id]);
             
 
             if($plan == true){
@@ -226,7 +226,7 @@
             $datetime = new Time();
             $date = $datetime->getDate();
 
-            $plan = new ProgramTrening();
+            $plan = new ProgramTraining();
             $plan->setUser($id);
             $plan->setDate($date);
             $plan->setTime($date);

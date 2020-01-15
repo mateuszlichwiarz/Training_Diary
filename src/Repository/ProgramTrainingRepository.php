@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\ProgramTrening;
+use App\Entity\ProgramTraining;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method ProgramTrening|null find($id, $lockMode = null, $lockVersion = null)
- * @method ProgramTrening|null findOneBy(array $criteria, array $orderBy = null)
- * @method ProgramTrening[]    findAll()
- * @method ProgramTrening[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ProgramTraining|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ProgramTraining|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ProgramTraining[]    findAll()
+ * @method ProgramTraining[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProgramTreningRepository extends ServiceEntityRepository
+class ProgramTrainingRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ProgramTrening::class);
+        parent::__construct($registry, ProgramTraining::class);
     }
 
     // /**
-    //  * @return ProgramTrening[] Returns an array of ProgramTrening objects
+    //  * @return ProgramTraining[] Returns an array of ProgramTraining objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class ProgramTreningRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?ProgramTrening
+    public function findOneBySomeField($value): ?ProgramTraining
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')

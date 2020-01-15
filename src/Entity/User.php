@@ -39,6 +39,12 @@ class User implements UserInterface
      */
     private $homepagesettings;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\GeneralSettings", inversedBy="user")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $generalsettings;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -128,4 +134,17 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getGeneralsettings(): ?GeneralSettings
+    {
+        return $this->generalsettings;
+    }
+
+    public function setGeneralsettings(?GeneralSettings $generalsettings): self
+    {
+        $this->generalsettings = $generalsettings;
+
+        return $this;
+    }
+
 }

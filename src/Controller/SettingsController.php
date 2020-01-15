@@ -67,7 +67,7 @@
 
             $idSettings = $user->getHomepagesettings();
             
-            if($id == '26')
+            if($id == '13')
             {
                 echo $id;
                 $homepageSettings = new HomepageSettings();
@@ -108,7 +108,7 @@
     
                 ]);
             }
-            elseif($id == '27')
+            elseif($id == '14')
             {
                 echo $id;
                 $generalSettings = new GeneralSettings();

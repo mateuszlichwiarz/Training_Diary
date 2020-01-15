@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProgramTreningRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ProgramTrainingRepository")
  */
-class ProgramTrening
+class ProgramTraining
 {
     /**
      * @ORM\Id()
@@ -17,7 +17,7 @@ class ProgramTrening
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=32)
      */
     private $name;
 
@@ -27,7 +27,7 @@ class ProgramTrening
     private $exercises = [];
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=180)
      */
     private $user;
 
@@ -105,5 +105,4 @@ class ProgramTrening
 
         return $this;
     }
-    
 }

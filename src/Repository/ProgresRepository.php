@@ -19,6 +19,7 @@ class ProgresRepository extends ServiceEntityRepository
         parent::__construct($registry, Progres::class);
     }
 
+
     /**
       * @return Progres[] Returns an array of Progres objects
      */
