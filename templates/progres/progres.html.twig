@@ -26,8 +26,6 @@
 
     <br><br><br>
 
-
-
     {% for items in workouts %}
     {% if items == true %}
 
@@ -48,10 +46,10 @@
                 <tbody>
                     <tr>
                         <td>{{ workout.exercise }}</td>
-                        <td>{{ workout.weight }} kg</td>
+                        <td>{{ workout.weight }} {{ weightUnit }}</td>
                         <td>{{ workout.sets }}</td>
                         <td>{{ workout.reps }}</td>
-                        <td>{{ workout.volume }} kg</td>
+                        <td>{{ workout.volume }} {{ weightUnit }}</td>
                     </tr>
                 </tbody>
 

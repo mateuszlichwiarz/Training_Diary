@@ -38,8 +38,10 @@
             $week = $time->getWeekArray();
 
 
-            $settings = new GeneralSettings();
-            $settings = $this->getDoctrine()->getRepository(GeneralSettings::class)->find($userId);
+            $generalSettings = $user->getGeneralSettings();
+            $weightUnit = $generalSettings->getWeightUnit();
+
+            print_r($weightUnit);
 
             $workouts = $ShowWorkouts->getProgres($today, $date, $userId, $week, $id);
 
@@ -54,6 +56,7 @@
                 'workouts' => $workouts,
                 'previous' => $previousWeek,
                 'forward'  => $forward,
+                'weightUnit' => $weightUnit,
             ]);
         }
     }
