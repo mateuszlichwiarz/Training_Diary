@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200115010842 extends AbstractMigration
+final class Version20200116190750 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,9 +22,9 @@ final class Version20200115010842 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE users ADD generalsettings_id INT NOT NULL, CHANGE roles roles JSON NOT NULL');
-        $this->addSql('ALTER TABLE users ADD CONSTRAINT FK_1483A5E949E04A61 FOREIGN KEY (generalsettings_id) REFERENCES general_settings (id)');
-        $this->addSql('CREATE INDEX IDX_1483A5E949E04A61 ON users (generalsettings_id)');
+        $this->addSql('ALTER TABLE user DROP FOREIGN KEY FK_8D93D649CAD08357');
+        $this->addSql('DROP INDEX IDX_8D93D649CAD08357 ON user');
+        $this->addSql('ALTER TABLE user DROP weightunit_id, CHANGE roles roles JSON NOT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -32,8 +32,8 @@ final class Version20200115010842 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE users DROP FOREIGN KEY FK_1483A5E949E04A61');
-        $this->addSql('DROP INDEX IDX_1483A5E949E04A61 ON users');
-        $this->addSql('ALTER TABLE users DROP generalsettings_id, CHANGE roles roles LONGTEXT CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_bin`');
+        $this->addSql('ALTER TABLE user ADD weightunit_id INT NOT NULL, CHANGE roles roles LONGTEXT CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_bin`');
+        $this->addSql('ALTER TABLE user ADD CONSTRAINT FK_8D93D649CAD08357 FOREIGN KEY (weightunit_id) REFERENCES general_settings (id)');
+        $this->addSql('CREATE INDEX IDX_8D93D649CAD08357 ON user (weightunit_id)');
     }
 }

@@ -80,4 +80,5 @@ class GeneralSettings
 
         return $this;
     }
+
 }

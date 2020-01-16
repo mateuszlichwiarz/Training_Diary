@@ -21,7 +21,7 @@ class HomepageSettings
     /**
      * @ORM\Column(type="integer")
      */
-    private $daysearlier;
+    private $daysEarlier;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="homepagesettings")
@@ -38,14 +38,14 @@ class HomepageSettings
         return $this->id;
     }
 
-    public function getDaysearlier(): ?int
+    public function getDaysEarlier(): ?int
     {
-        return $this->daysearlier;
+        return $this->daysEarlier;
     }
 
-    public function setDaysearlier(int $daysearlier): self
+    public function setDaysEarlier(int $daysEarlier): self
     {
-        $this->daysearlier = $daysearlier;
+        $this->daysEarlier = $daysEarlier;
 
         return $this;
     }
