@@ -41,8 +41,6 @@
             $settings = new GeneralSettings();
             $settings = $this->getDoctrine()->getRepository(GeneralSettings::class)->find($userId);
 
-            print_r($settings);
-
             $workouts = $ShowWorkouts->getProgres($today, $date, $userId, $week, $id);
 
             $previousWeek = $id + 1;
