@@ -8,8 +8,8 @@
         private $weight;
 
         public function __construct(
-            string $unit,
-            int $weight
+            $unit,
+            $weight
             ){
             $this->unit = $unit;
             $this->weight = $weight;
@@ -31,7 +31,7 @@
         private function convertToLbs()
         {
 
-            $result = $weight * 2.2;
+            $result = $this->weight * 2.2;
 
             return $result;
 
@@ -39,7 +39,7 @@
 
         private function convertToKg()
         {
-            $result = $weight/2.2;
+            $result = $this->weight/2.2;
 
             return $result;
         }
