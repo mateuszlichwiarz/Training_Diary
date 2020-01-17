@@ -74,7 +74,25 @@
                 <div id="edititem">
                     <tr>
                         <td> {{ item.exercise }} </td>
-                        <td> {{ item.weight }} kg </td>
+                        <td> {{ item.weight }} {{ weightUnit }} </td>
+                        <td> {{ item.sets }} </td>
+                        <td> {{ item.reps }} </td>
+                        <td>
+                            <form method="POST" action="/login/{}/{{ item.id }}">
+                                <input type="hidden" name="_method" value="DELETE"/>
+                                <input type="submit" class="btn btn-danger" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                </div>
+                {% endfor %}
+
+                {% elseif progresConverted is defined %}
+                {% for item in progresConverted %}
+                <div id="edititem">
+                    <tr>
+                        <td> {{ item.exercise }} </td>
+                        <td> {{ item.weight }} {{ weightUnit }} </td>
                         <td> {{ item.sets }} </td>
                         <td> {{ item.reps }} </td>
                         <td>
