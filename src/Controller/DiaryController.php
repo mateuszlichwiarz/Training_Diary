@@ -10,6 +10,7 @@
 
     use App\Service\Time;
     use App\Service\ShowWorkouts;
+    use App\Service\ConvertUnit;
 
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
@@ -33,6 +34,9 @@
 
             $user = $this->getUser();
             $id = $user->getId();
+
+            $generalSettings = $user->getGeneralsettings();
+            $weightUnit = $generalSettings->getWeightUnit();
 
             $homepageSettings = $user->getHomepagesettings();
             $daysEarlier = $homepageSettings->getDaysEarlier();
