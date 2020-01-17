@@ -7,6 +7,7 @@
     
     use App\Service\Time;
     use App\Service\ShowWorkouts;
+    use App\Service\ConvertUnit;
 
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
@@ -41,9 +42,7 @@
             $generalSettings = $user->getGeneralSettings();
             $weightUnit = $generalSettings->getWeightUnit();
 
-            print_r($weightUnit);
-
-            $workouts = $ShowWorkouts->getProgres($today, $date, $userId, $week, $id);
+            $workouts = $ShowWorkouts->getProgres($user, $today, $date, $userId, $week, $id);
 
             $previousWeek = $id + 1;
             $forward = $id - 1;
