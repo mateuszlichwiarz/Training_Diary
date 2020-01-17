@@ -62,7 +62,7 @@
             <thead>
                 <tr>
                     <th>Exercise</th>
-                    <th>Weight</th>
+                    <th>Weight(in {{weightUnit}})</th>
                     <th>Sets</th>
                     <th>reps</th>
                     <th>Action</th>
@@ -168,10 +168,10 @@
                         <tr>
                             <td>{{ workout.date|date("Y-m-d") }}({{ workout.day }})</td>
                             <td>{{ workout.exercise }}</td>
-                            <td>{{ workout.weight }} kg</td>
+                            <td>{{ workout.weight }} {{ weightUnit }}</td>
                             <td>{{ workout.sets }}</td>
                             <td>{{ workout.reps }}</td>
-                            <td>{{ workout.volume }} kg</td>
+                            <td>{{ workout.volume }} {{ weightUnit }}</td>
                         </tr>
                     </tbody>
 
