@@ -3,8 +3,11 @@
     namespace App\Service;
 
     use App\Entity\Progres;
+    use App\Entity\GeneralSettings;
+
     use Doctrine\ORM\EntityManagerInterface;
 
+    use App\Service\ConvertUnit;
     use App\Service\Time;
     use App\Service\WorkoutVolume;
 
@@ -215,15 +218,32 @@
                     $workoutsProperties[$i]['exercise'] = $workouts[$i]->getExercise();
                     $workoutsProperties[$i]['sets']     = $workouts[$i]->getSets();
                     $workoutsProperties[$i]['reps']     = $workouts[$i]->getReps();
-                    $workoutsProperties[$i]['weight']   = $workouts[$i]->getWeight();
 
-                    $weight = $workoutsProperties[$i]['weight'];
+                    $weight = $workouts[$i]->getWeight();
                     $sets   = $workoutsProperties[$i]['sets'];
                     $reps   = $workoutsProperties[$i]['reps'];
 
-                    $wv = new WorkoutVolume();
 
-                    $workoutsProperties[$i]['volume'] = $wv->getVolume($weight, $sets, $reps);
+                    $generalSettings = $user->getGeneralSettings();
+                    $weightUnit = $generalSettings->getWeightUnit();
+
+                    if($weightUnit == 'lbs')
+                    {
+                        $convert = new ConvertUnit();
+                        $weightConverted = $convert->execute($weightUnit, $weight);
+                    }
+
+                    $wv = new WorkoutVolume();
+                    if($weightUnit == 'lbs')
+                    {
+                        $workoutsProperties[$i]['weight'] = $weightConverted;
+                        $workoutsProperties[$i]['volume'] = $wv->getVolume($weightConverted, $sets, $reps);
+                    }else 
+                    {
+                        $workoutsProperties[$i]['weight'] = $weight;
+                        $workoutsProperties[$i]['volume'] = $wv->getVolume($weight, $sets, $reps);
+                    }
+                    
 
                     $i++;
                 }
@@ -264,9 +284,25 @@
                     $sets   = $workoutsProperties[$i]['sets'];
                     $reps   = $workoutsProperties[$i]['reps'];
 
-                    $wv = new WorkoutVolume();
+                    $generalSettings = $user->getGeneralSettings();
+                    $weightUnit = $generalSettings->getWeightUnit();
 
-                    $workoutsProperties[$i]['volume'] = $wv->getVolume($weight, $sets, $reps);
+                    if($weightUnit == 'lbs')
+                    {
+                        $convert = new ConvertUnit();
+                        $weightConverted = $convert->execute($weightUnit, $weight);
+                    }
+
+                    $wv = new WorkoutVolume();
+                    if($weightUnit == 'lbs')
+                    {
+                        $workoutsProperties[$i]['weight']   = $weightConverted;
+                        $workoutsProperties[$i]['volume'] = $wv->getVolume($weightConverted, $sets, $reps);
+                    }else 
+                    {
+                        $workoutsProperties[$i]['weight'] = $weight;
+                        $workoutsProperties[$i]['volume'] = $wv->getVolume($weight, $sets, $reps);
+                    }
 
                     $i++;
                 }
