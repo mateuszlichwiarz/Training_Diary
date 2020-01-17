@@ -4,42 +4,32 @@
 
     class ConvertUnit
     {
-        private $unit;
-        private $weight;
 
-        public function __construct(
-            $unit,
-            $weight
-            ){
-            $this->unit = $unit;
-            $this->weight = $weight;
-        }
-
-        public function execute()
+        public function execute($unit, $weight)
         {
 
-            switch($this->unit){
+            switch($unit){
                 case 'lbs':
-                    return $this->convertToKg();
+                    return $this->convertToLbs($weight);
                 break;
                 case 'kg':
-                    return $this->convertToLbs();
+                    return $this->convertToKg($weight);
                 break;
             }
         }
 
-        private function convertToLbs()
+        private function convertToLbs($weight)
         {
 
-            $result = $this->weight * 2.2;
+            $result = $weight * 2.2;
 
             return $result;
 
         }
 
-        private function convertToKg()
+        private function convertToKg($weight)
         {
-            $result = $this->weight/2.2;
+            $result = $weight/2.2;
 
             return $result;
         }
