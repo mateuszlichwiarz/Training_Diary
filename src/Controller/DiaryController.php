@@ -52,7 +52,7 @@
                 $day = $time->getDay();
                 $date = $time->getDate();
 
-                $workouts = $ShowWorkouts->getWorkouts($daysEarlier, $id, $date);
+                $workouts = $ShowWorkouts->getWorkouts($user, $daysEarlier, $id, $date);
                 
 
                 $property = [];
@@ -62,14 +62,28 @@
                 $i = 0;
 
                 $progres = $this->getDoctrine()->getRepository(Progres::class)->findBy(['user' => $id, 'day' => $day, 'date' => $date]);
-
                 foreach($progres as $item3){
 
                     $something[$i] = $progres[$i]->getExercise();
 
+                    if($weightUnit == 'lbs')
+                    {
+                        $progresConverted[$i]['sets'] = $progres[$i]->getSets();
+                        $progresConverted[$i]['reps'] = $progres[$i]->getReps();
+                        $progresConverted[$i]['exercise'] = $progres[$i]->getExercise();
+                        $progresConverted[$i]['id'] = $progres[$i]->getId();
+    
+                        $weight = $progres[$i]->getWeight();
+
+
+                        $convertion = new ConvertUnit();
+                        $weightConverted = $convertion->execute('lbs', $weight);
+    
+                        $progresConverted[$i]['weight'] = $weightConverted;
+                    }
+
                     $i++;
                 }
-
 
                 $property = (array_diff($exercises,$something));
 
@@ -80,15 +94,21 @@
                     next($property);
                 }
 
-
                 if(isset($_POST['exercise']) && isset($_POST['weight']) && isset($_POST['sets']) && isset($_POST['reps'])) {
                     
-                        $weight =   $_POST['weight'];
-                        $sets =     $_POST['sets'];
-                        $reps =     $_POST['reps'];
+                        $weight   = $_POST['weight'];
+                        $sets     = $_POST['sets'];
+                        $reps     = $_POST['reps'];
                         $exercise = $_POST['exercise'];
                     
                     if($weight == true && $sets == true && $reps == true) {
+
+                        if($weightUnit == 'lbs')
+                        {
+                            $convertion = new ConvertUnit();
+                            $weightConverted = $convertion->execute('kg', $weight);
+                        }
+                        
 
                         $datetime = new Time();
                         $date = $datetime->getDate();
@@ -97,7 +117,18 @@
                         $add->setUser($id);
                         $add->setDay($day);
                         $add->setExercise($exercise);
-                        $add->setWeight($weight);
+
+                        if($weightUnit == 'lbs')
+                        {
+                            $add->setWeight($weightConverted);
+                        }elseif($weightUnit == 'kg')
+                        {
+                            $add->setWeight($weight);
+                        }else
+                        {
+                            $add->setWeight(0);
+                        }
+
                         $add->setSets($sets);
                         $add->setReps($reps);
                         $add->setDate($date);
@@ -110,21 +141,33 @@
                         $message['correct'] = "You add exercise today progres, Excellent!";
 
                         $property = [];
-
                         $something = [];
-            
                         $i = 0;
                         
                         $progres = $this->getDoctrine()->getRepository(Progres::class)->findBy(['user' => $id, 'day' => $day, 'date' => $date]);
-            
                         foreach($progres as $item3){
             
                             $something[$i] = $progres[$i]->getExercise();
+
+                            if($weightUnit == 'lbs')
+                            {
+                                $progresConverted[$i]['sets'] = $progres[$i]->getSets();
+                                $progresConverted[$i]['reps'] = $progres[$i]->getReps();
+                                $progresConverted[$i]['exercise'] = $progres[$i]->getExercise();
+                                $progresConverted[$i]['id'] = $progres[$i]->getId();
+            
+                                $weight = $progres[$i]->getWeight();
+
+
+                                $convertion = new ConvertUnit();
+                                $weightConverted = $convertion->execute('lbs', $weight);
+            
+                                $progresConverted[$i]['weight'] = $weightConverted;
+                            }
             
                             $i++;
                         }
-            
-            
+
                         $property = (array_diff($exercises,$something));
             
                         $property2 = [];
@@ -138,20 +181,34 @@
                         $day = $time->getDay();
                         $date = $time->getDate();
 
-                        $workouts = $ShowWorkouts->getWorkouts($daysEarlier, $id, $date);
+                        $workouts = $ShowWorkouts->getWorkouts($user, $daysEarlier, $id, $date);
 
-
-                        return $this->render('diary/index.html.twig', [
-                            'plan' => $plan,
-                            'message' => $message,
-                            'exercises' => $property2,
-                            'progres' => $progres,
-                            'workouts' => $workouts,
-                            'homepageSettings' => $homepageSettings,
-                            'day' => $day
-                        ]);
+                        if($weightUnit == 'lbs')
+                        {
+                            return $this->render('diary/index.html.twig', [
+                                'plan' => $plan,
+                                'message' => $message,
+                                'exercises' => $property2,
+                                'progresConverted' => $progresConverted,
+                                'workouts' => $workouts,
+                                'homepageSettings' => $homepageSettings,
+                                'day' => $day,
+                                'weightUnit'=> $weightUnit
+                            ]);
+                        }else
+                        {
+                            return $this->render('diary/index.html.twig', [
+                                'plan' => $plan,
+                                'message' => $message,
+                                'exercises' => $property2,
+                                'progres' => $progres,
+                                'workouts' => $workouts,
+                                'homepageSettings' => $homepageSettings,
+                                'day' => $day,
+                                'weightUnit'=> $weightUnit
+                            ]);
+                        }
                         
-
                     } else {
 
                         $message['error'] = "Please fill fields!";
@@ -163,7 +220,8 @@
                             'progres' => $progres,
                             'workouts' => $workouts,
                             'homepageSettings' => $homepageSettings,
-                            'day' => $day
+                            'day' => $day,
+                            'weightUnit'=> $weightUnit
                         ]);
                         
 
@@ -172,15 +230,31 @@
                     
                 }
 
-                return $this->render('diary/index.html.twig', [
-                    'plan' => $plan,
-                    'exercises' => $property2,
-                    'somethings' => $something,
-                    'day' => $day,
-                    'progres' => $progres,
-                    'workouts' => $workouts,
-                    'homepageSettings' => $homepageSettings,
-                ]);
+                if($weightUnit == 'lbs' &&  isset($progresConverted) )
+                {
+                    return $this->render('diary/index.html.twig', [
+                        'plan' => $plan,
+                        'exercises' => $property2,
+                        'somethings' => $something,
+                        'day' => $day,
+                        'progresConverted' => $progresConverted,
+                        'workouts' => $workouts,
+                        'homepageSettings' => $homepageSettings,
+                        'weightUnit'=> $weightUnit
+                    ]);
+                }else
+                {
+                    return $this->render('diary/index.html.twig', [
+                        'plan' => $plan,
+                        'exercises' => $property2,
+                        'somethings' => $something,
+                        'day' => $day,
+                        'progres' => $progres,
+                        'workouts' => $workouts,
+                        'homepageSettings' => $homepageSettings,
+                        'weightUnit'=> $weightUnit
+                    ]);
+                }
 
 
             }else{
