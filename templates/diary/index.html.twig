@@ -78,15 +78,24 @@
                         <td> {{ item.sets }} </td>
                         <td> {{ item.reps }} </td>
                         <td>
-                            <form method="POST" action="/login/{}/{{ item.id }}">
-                                <input type="hidden" name="_method" value="DELETE"/>
-                                <input type="submit" class="btn btn-danger" value="Delete">
-                            </form>
+                            <div class="actions">
+                                <div style="float: left;">
+                                    <form method="POST" action="/login/{}">
+                                        <input type="submit" class="btn btn-success" value="Similar">
+                                    </form>
+                                </div>
+                                <div style="float: left;">
+                                    <form method="POST" action="/login/{}/{{ item.id }}">
+                                        <input type="hidden" name="_method" value="DELETE"/>
+                                        <input type="submit" class="btn btn-danger" value="Delete">
+                                    </form>
+                                </div>
+                                <div style="clear: both;"></div>
+                            </div>
                         </td>
                     </tr>
                 </div>
                 {% endfor %}
-
                 {% elseif progresConverted is defined %}
                 {% for item in progresConverted %}
                 <div id="edititem">
@@ -96,14 +105,29 @@
                         <td> {{ item.sets }} </td>
                         <td> {{ item.reps }} </td>
                         <td>
-                            <form method="POST" action="/login/{}/{{ item.id }}">
-                                <input type="hidden" name="_method" value="DELETE"/>
-                                <input type="submit" class="btn btn-danger" value="Delete">
-                            </form>
+                            <div class="actions">
+                                <div style="float: left;">
+                                    <form method="POST" action="/login/{}/">
+                                        <input type="submit" class="btn btn-success" value="Similar">
+                                    </form>
+                                </div>
+                                <div style="float: left;">
+                                    <form method="POST" action="/login/{}/{{ item.id }}">
+                                        <input type="hidden" name="_method" value="DELETE"/>
+                                        <input type="submit" class="btn btn-danger" value="Delete">
+                                    </form>
+                                </div>
+                                <div style="clear: both;">
+                            </div>
                         </td>
                     </tr>
                 </div>
                 {% endfor %}
+
+                <form method="POST" action="/login/{}/">
+                    <input type="submit" class="btn btn-success" value="Similar">
+                </form>
+
                 {% endif %}
 
                 {% if exercises is defined %}
@@ -147,6 +171,9 @@
             </tbody>
         </table>
 
+        <form method="POST" action="/login/{}/">
+            <input type="submit" class="btn btn-success" value="New exercise">
+        </form>
     {% endif %}
 
     <br><br><br><br><br>
