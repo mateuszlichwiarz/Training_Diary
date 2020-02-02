@@ -48,6 +48,8 @@
 
                 $exercises = $plan->getExercises();
 
+                $exercisesCount = count($exercises);
+
                 $time = new Time();
                 $day = $time->getDay();
                 $date = $time->getDate();
@@ -94,8 +96,74 @@
                     next($property);
                 }
 
-                if(isset($_POST['exercise']) && isset($_POST['weight']) && isset($_POST['sets']) && isset($_POST['reps'])) {
+                if(isset($_POST['similar']) && isset($_POST['name']))
+                {
+                    $similar = $_POST['similar'];
+                    $name    = $_POST['name'];
+
+                    foreach($something as $item)
+                    {
+                        if($name == $item)
+                        {
+                            $i = 0;
+                            $letters = str_split($item);
+                            $countLetters = count($letters)-1;
+
+                            $wanted = array();
+                            $wantedStart = array();
+                            $number;
+
+                            foreach($letters as $letter)
+                            {
+                                if($letter == '#' )
+                                {
+                                    $number = $i;
+
+                                }else
+                                {
+                                    $name = $_POST['name'].'#2';
+                                }
+                                $i++;
+                            }
+
+                            $m = 0;
+                            if(isset($number))
+                            {
+                                for($l = 0; $l < $number; $l++)
+                                {
+                                    $wantedStart[$m] = $letters[$l];
+
+                                    $m++;
+                                }
+
+                                $k = 0;
+                                for($j = $number; $j <= $countLetters; $j++)
+                                {
+
+                                    $wanted[$k] = $letters[$j];
+
+                                    $end = $k;
+                                    $k++;
+                                }
+                                
+                                $numberEnd = $wanted[$end]+1;
+
+                                $numberForName = implode("", $wanted);
+
+                                $exerciseName = implode("", $wantedStart);
+
+                                $name = $exerciseName.'#'.$numberEnd;
+                            }
+                        }
+                    }
                     
+                }else{
+                    $similar = 0;
+                    $name = 0;
+                }
+
+                if(isset($_POST['exercise']) && isset($_POST['weight']) && isset($_POST['sets']) && isset($_POST['reps'])) {
+
                         $weight   = $_POST['weight'];
                         $sets     = $_POST['sets'];
                         $reps     = $_POST['reps'];
@@ -189,11 +257,14 @@
                                 'plan' => $plan,
                                 'message' => $message,
                                 'exercises' => $property2,
+                                'similar' => $similar,
                                 'progresConverted' => $progresConverted,
                                 'workouts' => $workouts,
                                 'homepageSettings' => $homepageSettings,
                                 'day' => $day,
-                                'weightUnit'=> $weightUnit
+                                'weightUnit'=> $weightUnit,
+                                'name' => $name,
+                                'quickNew' => $quickNew,
                             ]);
                         }else
                         {
@@ -201,11 +272,14 @@
                                 'plan' => $plan,
                                 'message' => $message,
                                 'exercises' => $property2,
+                                'similar' => $similar,
                                 'progres' => $progres,
                                 'workouts' => $workouts,
                                 'homepageSettings' => $homepageSettings,
                                 'day' => $day,
-                                'weightUnit'=> $weightUnit
+                                'weightUnit'=> $weightUnit,
+                                'name' => $name,
+                                'quickNew' => $quickNew,
                             ]);
                         }
                         
@@ -217,11 +291,14 @@
                             'plan' => $plan,
                             'message' => $message,
                             'exercises' => $property2,
+                            'similar' => $similar,
                             'progres' => $progres,
                             'workouts' => $workouts,
                             'homepageSettings' => $homepageSettings,
                             'day' => $day,
-                            'weightUnit'=> $weightUnit
+                            'weightUnit'=> $weightUnit,
+                            'name' => $name,
+                            'quickNew' => $quickNew,
                         ]);
                         
 
@@ -235,24 +312,30 @@
                     return $this->render('diary/index.html.twig', [
                         'plan' => $plan,
                         'exercises' => $property2,
+                        'similar' => $similar,
                         'somethings' => $something,
                         'day' => $day,
                         'progresConverted' => $progresConverted,
                         'workouts' => $workouts,
                         'homepageSettings' => $homepageSettings,
-                        'weightUnit'=> $weightUnit
+                        'weightUnit'=> $weightUnit,
+                        'name' => $name,
+                        'quickNew' => $quickNew,
                     ]);
                 }else
                 {
                     return $this->render('diary/index.html.twig', [
                         'plan' => $plan,
                         'exercises' => $property2,
+                        'similar' => $similar,
                         'somethings' => $something,
                         'day' => $day,
                         'progres' => $progres,
                         'workouts' => $workouts,
                         'homepageSettings' => $homepageSettings,
-                        'weightUnit'=> $weightUnit
+                        'weightUnit'=> $weightUnit,
+                        'name' => $name,
+                        'quickNew' => $quickNew,
                     ]);
                 }
 
