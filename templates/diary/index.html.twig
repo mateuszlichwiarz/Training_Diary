@@ -8,7 +8,6 @@
 
     <h4> Hello, {{ app.user.username }}</h4>
 
-
     <br>
     <br>
     {% if day is defined %}
@@ -74,13 +73,16 @@
                 <div id="edititem">
                     <tr>
                         <td> {{ item.exercise }} </td>
+
                         <td> {{ item.weight }} {{ weightUnit }} </td>
                         <td> {{ item.sets }} </td>
                         <td> {{ item.reps }} </td>
                         <td>
-                            <div class="actions">
-                                <div style="float: left;">
+                            <div id="actions">
+                                <div class="similar" style="float: left;">
                                     <form method="POST" action="/login/{}">
+                                        <input type="hidden" id="similar" name="similar" value="1">
+                                        <input type="hidden" id="name" name="name" value="{{ item.exercise }}">
                                         <input type="submit" class="btn btn-success" value="Similar">
                                     </form>
                                 </div>
@@ -105,9 +107,11 @@
                         <td> {{ item.sets }} </td>
                         <td> {{ item.reps }} </td>
                         <td>
-                            <div class="actions">
-                                <div style="float: left;">
-                                    <form method="POST" action="/login/{}/">
+                         <div id="actions">
+                                <div class="similar" style="float: left;">
+                                    <form method="POST" action="/login/{}">
+                                        <input type="hidden" id="similar" name="similar" value="1">
+                                        <input type="hidden" id="name" name="name" value="{{ item.exercise }}">
                                         <input type="submit" class="btn btn-success" value="Similar">
                                     </form>
                                 </div>
@@ -117,7 +121,7 @@
                                         <input type="submit" class="btn btn-danger" value="Delete">
                                     </form>
                                 </div>
-                                <div style="clear: both;">
+                                <div style="clear: both;"></div>
                             </div>
                         </td>
                     </tr>
