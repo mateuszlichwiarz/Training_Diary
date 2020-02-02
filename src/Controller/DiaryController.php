@@ -46,6 +46,13 @@
 
             if($plan == true){
 
+                if(isset($_POST['new']))
+                {
+                    $quickNew = $_POST['new'];
+                }else{
+                    $quickNew = 0;
+                }
+
                 $exercises = $plan->getExercises();
 
                 $exercisesCount = count($exercises);
@@ -70,10 +77,10 @@
 
                     if($weightUnit == 'lbs')
                     {
-                        $progresConverted[$i]['sets'] = $progres[$i]->getSets();
-                        $progresConverted[$i]['reps'] = $progres[$i]->getReps();
+                        $progresConverted[$i]['sets']     = $progres[$i]->getSets();
+                        $progresConverted[$i]['reps']     = $progres[$i]->getReps();
                         $progresConverted[$i]['exercise'] = $progres[$i]->getExercise();
-                        $progresConverted[$i]['id'] = $progres[$i]->getId();
+                        $progresConverted[$i]['id']       = $progres[$i]->getId();
     
                         $weight = $progres[$i]->getWeight();
 
