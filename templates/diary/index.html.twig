@@ -96,8 +96,94 @@
                             </div>
                         </td>
                     </tr>
+
                 </div>
                 {% endfor %}
+
+                {% if quickNew is defined %}
+                {% if quickNew == 1 %}
+                    <tr>
+                        <form method="POST" id="form"."similar" action="/login/{}">
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" placeholder="exercise" name="exercise" id="exercise" />
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <input type="number" class="form-control" name="weight" min="1" max="600" placeholder="0" id="weight" />
+                                    </div> 
+                                </div>
+                            </td>
+                            
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <input type="number" class="form-control" name="sets" min="1" max="30" placeholder="0" id="sets" />
+                                    </div> 
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <input type="number" class="form-control" name="reps" min="1" max="600" placeholder="0" id="reps" />
+                                    </div> 
+                                </div>
+                            </td>
+
+                            <td>
+                                <input type="submit" class="btn btn-success" value="Setup"/>
+                            </td>
+                        </form>
+                    </tr>
+                {% endif %}
+                {% endif %}
+
+                {% if similar is defined %}
+                {% if name is defined%}
+                    {% if similar == 1 %}
+                    <tr>
+                        <td>{{ name }}</td>
+                        <form method="POST" id="form"."similar" action="/login/{}">
+
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <input type="number" class="form-control" name="weight" min="1" max="600" placeholder="0" id="weight" />
+                                    </div> 
+                                </div>
+                            </td>
+                            
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <input type="number" class="form-control" name="sets" min="1" max="30" placeholder="0" id="sets" />
+                                    </div> 
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <input type="number" class="form-control" name="reps" min="1" max="600" placeholder="0" id="reps" />
+                                    </div> 
+                                </div>
+                            </td>
+
+                            <td> 
+                                <input type="hidden" name="exercise" id="exercise" value="{{ name }}"/>
+                                <input type="submit" class="btn btn-success" value="Setup"/>
+                            </td>
+                        </form>
+                    </tr>
+                    {% endif %}
+                    {% endif %}
+                {% endif %}
                 {% elseif progresConverted is defined %}
                 {% for item in progresConverted %}
                 <div id="edititem">
@@ -174,9 +260,10 @@
                 {% endif %}
             </tbody>
         </table>
-
-        <form method="POST" action="/login/{}/">
-            <input type="submit" class="btn btn-success" value="New exercise">
+        
+        <form method="POST" action="/login/{}">
+            <input type="hidden" name="new" id="new" value="1">
+            <input type="submit" class="btn btn-success" value="Quick New Exercise">
         </form>
     {% endif %}
 
