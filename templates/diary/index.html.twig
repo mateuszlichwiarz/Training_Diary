@@ -106,7 +106,7 @@
                         <form method="POST" id="form"."similar" action="/login/{}">
                             <td>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-9 col-sm-5 col-lg-7 col-xl-7">
                                         <input type="text" class="form-control" placeholder="exercise" name="exercise" id="exercise" />
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@
 
                             <td>
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-12 col-sm-12 col-lg-7 col-md-7">
                                         <input type="number" class="form-control" name="weight" min="1" max="600" placeholder="0" id="weight" />
                                     </div> 
                                 </div>
@@ -122,15 +122,15 @@
                             
                             <td>
                                 <div class="row">
-                                    <div class="col-md-5">
-                                        <input type="number" class="form-control" name="sets" min="1" max="30" placeholder="0" id="sets" />
+                                    <div class="col-12 col-sm-12 col-lg-7 col-md-7">
+                                        <input type="number" class="form-control" name="sets" min="1" max="600" placeholder="0" id="sets" />
                                     </div> 
                                 </div>
                             </td>
 
                             <td>
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-12 col-sm-12 col-lg-7 col-md-7">
                                         <input type="number" class="form-control" name="reps" min="1" max="600" placeholder="0" id="reps" />
                                     </div> 
                                 </div>
@@ -148,12 +148,14 @@
                 {% if name is defined%}
                     {% if similar == 1 %}
                     <tr>
+                        <div class="col-9 col-sm-5 col-lg-7 col-xl-7">
                         <td>{{ name }}</td>
+                        </div>
                         <form method="POST" id="form"."similar" action="/login/{}">
 
                             <td>
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-12 col-sm-5 col-lg-7 col-xl-7">
                                         <input type="number" class="form-control" name="weight" min="1" max="600" placeholder="0" id="weight" />
                                     </div> 
                                 </div>
@@ -161,15 +163,15 @@
                             
                             <td>
                                 <div class="row">
-                                    <div class="col-md-5">
-                                        <input type="number" class="form-control" name="sets" min="1" max="30" placeholder="0" id="sets" />
+                                    <div class="col-12 col-sm-12 col-lg-7 col-md-7">
+                                        <input type="number" class="form-control" name="sets" min="1" max="600" placeholder="0" id="sets" />
                                     </div> 
                                 </div>
                             </td>
 
                             <td>
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-12 col-sm-12 col-lg-7 col-md-7">
                                         <input type="number" class="form-control" name="reps" min="1" max="600" placeholder="0" id="reps" />
                                     </div> 
                                 </div>
@@ -223,12 +225,14 @@
                 {% if exercises is defined %}
                 {% for exercise in exercises %}
                     <tr>
+                        <div class="col-9 col-sm-5 col-lg-7 col-xl-7">
                         <td> {{ exercise }}</td>
+                        </div>
                         <form method="POST" id="form"."{{ loop.index0 }}" action="/login/{}">
 
                             <td>
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-12 col-sm-5 col-lg-7 col-xl-7">
                                         <input type="number" class="form-control" name="weight" min="1" max="600" placeholder="0" id="weight" />
                                     </div> 
                                 </div>
@@ -236,15 +240,15 @@
                             
                             <td>
                                 <div class="row">
-                                    <div class="col-md-5">
-                                        <input type="number" class="form-control" name="sets" min="1" max="30" placeholder="0" id="sets" />
+                                   <div class="col-12 col-sm-12 col-lg-7 col-md-7">
+                                        <input type="number" class="form-control" name="sets" min="1" max="600" placeholder="0" id="sets" />
                                     </div> 
                                 </div>
                             </td>
 
                             <td>
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-12 col-sm-12 col-lg-7 col-md-7">
                                         <input type="number" class="form-control" name="reps" min="1" max="600" placeholder="0" id="reps" />
                                     </div> 
                                 </div>
