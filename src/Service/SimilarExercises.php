@@ -13,7 +13,7 @@
             array $exercisesName
             ){
                 $this->nameOfBaseExercise = $nameOfBaseExc;
-                $this->exercisesName = $excName;
+                $this->exercisesName = $excsName;
             }
 
         public function getNameOfBaseExc()
@@ -21,53 +21,32 @@
             return $this->nameOfBaseExc;
         }
 
-        public function getExcName()
+        public function getExcsName()
         {
-            return $this->getExcName;
+            return $this->ExcsName;
         }
 
         public function main()
         {
-            foreach($this->something as $item)
+            $name     = $this->getNameOfBaseExc();
+            $excsName = $this->getExcsName();
+
+            foreach($excsName as $item)
             {
                 if($name == $item)
                 {
                     $letters = $this->getSplitWordToLetters($item);
                     $countOfLetters = $this->getCountOfLetters($letters);
-
-                    $wanted = array();
-                    $wantedStart = array();
                     
                     $char = '#';
                     $position = $this->getCharacterPosition($letters, $char);
 
-                    $m = 0;
-                    if(isset($position))
+                    if($position !== false)
                     {
-                        for($l = 0; $l < $position; $l++)
-                        {
-                            $wantedStart[$m] = $letters[$l];
-
-                            $m++;
-                        }
-
-                            $k = 0;
-
-                            for($j = $number; $j <= $countLetters; $j++)
-                            {
-                                $wanted[$k] = $letters[$j];
-
-                                $end = $k;
-                                $k++;
-                            }
-                                
-                            $numberEnd = $wanted[$end]+1;
-
-                            $numberForName = implode("", $wanted);
-
-                            $exerciseName = implode("", $wantedStart);
-
-                            $name = $exerciseName.'#'.$numberEnd;
+                        return $name = $this->newName($position, $countOfLetters, $letters);
+                    }else
+                    {
+                        $name = $this->name.'#2';
                     }
                 }
             }
@@ -92,15 +71,60 @@
             {
                 if($letter == $char)
                 {
-                    $number = $i;
+                    $position = $i;
 
-                    return $number;
+                    return $position;
                 }else
                 {
                     return false;
                 }
                 $i++;
             }
+        }
+
+        private function getPureExerciseName($position, $letters)
+        {
+            $frontLetters = array();
+            $j = 0;
+
+            for($i = 0; $i < $position; $i++)
+            {
+                $frontLetters[$j] = $letters[$i];
+
+                $j++;
+            }
+
+            $exerciseName = implode("", $frontLetters);
+
+            return $exerciseName;
+        }
+
+        private function getLastOneFromEnding($position,$countOfLetters, $letters)
+        {
+            $ending = array();
+            $j = 0;
+            for($i = $position; $i <= $countOfLetters; $i++)
+            {
+                $ending[$j] = $letters[$i];
+
+                $positionOfLast = $j;
+                $j++;
+            }
+                                
+            $lastOne = $ending[$end]+1;
+
+            return $lastOne;
+
+        }
+
+        private function newName($position, $countOfLetters, $letters)
+        {                       
+            $lastOne = $this->getLastOneFromEnding($position, $countOfLetters, $letters);
+            $pureExerciseName = $this->getPureExerciseName($position);
+
+            $name = $pureExerciseName.'#'.$lastOne;
+
+            return $name;
         }
 
     }

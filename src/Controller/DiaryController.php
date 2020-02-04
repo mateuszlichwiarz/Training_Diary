@@ -11,6 +11,7 @@
     use App\Service\Time;
     use App\Service\ShowWorkouts;
     use App\Service\ConvertUnit;
+    use App\Service\SimilarExercises;
 
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
@@ -152,10 +153,9 @@
                                     $end = $k;
                                     $k++;
                                 }
-                                
-                                $numberEnd = $wanted[$end]+1;
 
-                                $numberForName = implode("", $wanted);
+                                print_r($wanted);
+                                $numberEnd = $wanted[$end]+1;
 
                                 $exerciseName = implode("", $wantedStart);
 
