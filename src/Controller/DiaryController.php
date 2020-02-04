@@ -106,64 +106,13 @@
 
                 if(isset($_POST['similar']) && isset($_POST['name']))
                 {
+                    $name   = $_POST['name'];
                     $similar = $_POST['similar'];
-                    $name    = $_POST['name'];
 
-                    foreach($something as $item)
-                    {
-                        if($name == $item)
-                        {
-                            $i = 0;
-                            $letters = str_split($item);
-                            $countLetters = count($letters)-1;
+                    $newSimilar = new SimilarExercises($name, $something, '#');
 
-                            $wanted = array();
-                            $wantedStart = array();
-                            $number;
-
-                            foreach($letters as $letter)
-                            {
-                                if($letter == '#' )
-                                {
-                                    $number = $i;
-
-                                }else
-                                {
-                                    $name = $_POST['name'].'#2';
-                                }
-                                $i++;
-                            }
-
-                            $m = 0;
-                            if(isset($number))
-                            {
-                                for($l = 0; $l < $number; $l++)
-                                {
-                                    $wantedStart[$m] = $letters[$l];
-
-                                    $m++;
-                                }
-
-                                $k = 0;
-                                for($j = $number; $j <= $countLetters; $j++)
-                                {
-
-                                    $wanted[$k] = $letters[$j];
-
-                                    $end = $k;
-                                    $k++;
-                                }
-
-                                print_r($wanted);
-                                $numberEnd = $wanted[$end]+1;
-
-                                $exerciseName = implode("", $wantedStart);
-
-                                $name = $exerciseName.'#'.$numberEnd;
-                            }
-                        }
-                    }
-                    
+                    $name = $newSimilar->main();
+                
                 }else{
                     $similar = 0;
                     $name = 0;

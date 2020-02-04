@@ -7,29 +7,38 @@
     {
         private $nameOfBaseExercise;
         private $exercisesName;
+        private $char;
 
         public function __construct(
             string $nameOfBaseExercise,
-            array $exercisesName
+            array $exercisesName,
+            string $char
             ){
-                $this->nameOfBaseExercise = $nameOfBaseExc;
-                $this->exercisesName = $excsName;
+                $this->nameOfBaseExercise = $nameOfBaseExercise;
+                $this->exercisesName      = $exercisesName;
+                $this->char               = $char;
             }
 
-        public function getNameOfBaseExc()
+        public function getNameOfBaseExercise()
         {
-            return $this->nameOfBaseExc;
+            return $this->nameOfBaseExercise;
         }
 
-        public function getExcsName()
+        public function getExercisesName()
         {
-            return $this->ExcsName;
+            return $this->exercisesName;
+        }
+
+        public function getChar()
+        {
+            return $this->char;
         }
 
         public function main()
         {
-            $name     = $this->getNameOfBaseExc();
-            $excsName = $this->getExcsName();
+            $name     = $this->getNameOfBaseExercise();
+            $excsName = $this->getExercisesName();
+            $char     = $this->getChar();
 
             foreach($excsName as $item)
             {
@@ -38,15 +47,18 @@
                     $letters = $this->getSplitWordToLetters($item);
                     $countOfLetters = $this->getCountOfLetters($letters);
                     
-                    $char = '#';
                     $position = $this->getCharacterPosition($letters, $char);
 
-                    if($position !== false)
+                    if($position)
                     {
-                        return $name = $this->newName($position, $countOfLetters, $letters);
+                        $name = $this->newName($position, $countOfLetters, $letters);
+
+                        return $name;
                     }else
                     {
-                        $name = $this->name.'#2';
+                        $name = $name.'#2';
+
+                        return $name;
                     }
                 }
             }
@@ -67,16 +79,15 @@
         private function getCharacterPosition($letters, $char)
         {
             $i = 0;
+
             foreach($letters as $letter)
             {
+                echo $letter.'<br>';
                 if($letter == $char)
                 {
                     $position = $i;
-
+                    
                     return $position;
-                }else
-                {
-                    return false;
                 }
                 $i++;
             }
