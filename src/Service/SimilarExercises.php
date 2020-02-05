@@ -56,7 +56,7 @@
                         return $name;
                     }else
                     {
-                        $name = $name.'#2';
+                        $name = $name.$char.'2';
 
                         return $name;
                     }
