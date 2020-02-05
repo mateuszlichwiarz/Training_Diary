@@ -87,14 +87,9 @@
                     $position = $i;
 
                     return $position;
-
-                    echo $position;
-                    
                 }else
                 {
                     $position = '0';
-
-                    echo $position;
                 }
                 $i++;
             }
