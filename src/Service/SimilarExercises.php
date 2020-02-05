@@ -2,7 +2,6 @@
 
     namespace App\Service;
 
-
     class SimilarExercises
     {
         private $nameOfBaseExercise;
@@ -131,7 +130,6 @@
             $lastOne = $ending[$last]+1;
 
             return $lastOne;
-
         }
 
         private function newName($position, $countOfLetters, $letters)
@@ -143,5 +141,4 @@
 
             return $name;
         }
-
     }

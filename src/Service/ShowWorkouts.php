@@ -11,7 +11,6 @@
     use App\Service\Time;
     use App\Service\WorkoutVolume;
 
-
     class ShowWorkouts
     {
         /**
@@ -26,26 +25,20 @@
 
         public function getWorkouts($user, $howLong, $userId, $currentdate)
         {
-
             $date = new Time();
             $interestedDate = $date->dateFromAgo($howLong);
 
-
             $properties = $this->getPropertiesWorkouts($user, $userId, $interestedDate, $currentdate);
             
-
             return $properties;
-            
         }
 
         public function getWorkoutsAll($user, $howLong, $day, $userId, $currentdate)
         {
-            
             $date = new Time();
             $interestedDate = $date->dateFromAgo($howLong);
 
             $properties = $this->getPropertiesWorkoutsAll($user, $userId, $day, $interestedDate, $currentdate);
-
 
             return $properties;
         }
@@ -56,8 +49,8 @@
             $result = $whichWeek * $addDays;
             $user;
 
-            if($result !== 0){
-
+            if($result !== 0)
+            {
                 $cutDate = $date->modify("-".$result." day");
 
                 $howLong[0] = 1 + $result;
@@ -68,8 +61,8 @@
                 $howLong[5] = 6 + $result;
                 $howLong[6] = 7 + $result;
 
-                if($today == 'Monday'){
-
+                if($today == 'Monday')
+                {
                     $endDay = $cutDate->modify("+6 day");
     
                     foreach($week as $day)
@@ -77,8 +70,8 @@
                         $workouts[] = $this->getWorkoutsAll($user, $howLong[0], $day, $userId, $endDay);
                     }
                     
-                }elseif($today == 'Thuesday'){
-    
+                }elseif($today == 'Thuesday')
+                {
                     $endDay = $cutDate->modify("+5 day");
     
                     foreach($week as $day)
@@ -86,8 +79,8 @@
                         $workouts[] = $this->getWorkoutsAll($user, $howLong[1], $day, $userId, $endDay);
                     }
                     
-                }elseif($today == 'Wednesday'){
-    
+                }elseif($today == 'Wednesday')
+                {
                     $endDay = $cutDate->modify("+4 day");
     
                     foreach($week as $day)
@@ -95,8 +88,8 @@
                         $workouts[] = $this->getWorkoutsAll($user, $howLong[2], $day, $userId, $endDay);
                     }
     
-                }elseif($today == 'Thursday'){
-    
+                }elseif($today == 'Thursday')
+                {
                     $endDay = $cutDate->modify("+3 day");
     
                     foreach($week as $day)
@@ -104,8 +97,8 @@
                         $workouts[] = $this->getWorkoutsAll($user, $howLong[3], $day, $userId, $endDay);
                     }
     
-                }elseif($today == 'Friday'){
-    
+                }elseif($today == 'Friday')
+                {
                     $endDay = $cutDate->modify("+2 day");
                    
                     foreach($week as $day)
@@ -113,8 +106,8 @@
                         $workouts[] = $this->getWorkoutsAll($user, $howLong[4], $day, $userId, $endDay);
                     }
                     
-                }elseif($today == 'Saturday'){
-                    
+                }elseif($today == 'Saturday')
+                {
                     $endDay = $cutDate->modify("+1 day");
     
                     foreach($week as $day)
@@ -122,78 +115,71 @@
                         $workouts[] = $this->getWorkoutsAll($user, $howLong[5], $day, $userId, $endDay);
                     }
     
-                }elseif($today == 'Sunday'){
-                    
+                }elseif($today == 'Sunday')
+                {
                     $endDay = $cutDate->modify("+0 day");
                     foreach($week as $day)
                     {
                         $workouts[] = $this->getWorkoutsAll($user, $howLong[6], $day, $userId, $cutDate);
                     }
-    
                 }
-    
     
                 return $workouts;
 
-
-            }else{
-
-                if($today == 'Monday'){
-    
+            }else
+            {
+                if($today == 'Monday')
+                {
                     foreach($week as $day)
                     {
                         $workouts[] = $this->getWorkoutsAll($user, '1', $day, $userId, $date);
                     }
                     
-                }elseif($today == 'Thuesday'){
-    
+                }elseif($today == 'Thuesday')
+                {
                     foreach($week as $day)
                     {
                         $workouts[] = $this->getWorkoutsAll($user, '2', $day, $userId, $date);
                     }
                     
-                }elseif($today == 'Wednesday'){
-    
+                }elseif($today == 'Wednesday')
+                {
                     foreach($week as $day)
                     {
                         $workouts[] = $this->getWorkoutsAll($user, '3', $day, $userId, $date);
                     }
     
-                }elseif($today == 'Thursday'){
-    
+                }elseif($today == 'Thursday')
+                {
                     foreach($week as $day)
                     {
                         $workouts[] = $this->getWorkoutsAll($user, '4', $day, $userId, $date);
                     }
     
-                }elseif($today == 'Friday'){
-                   
+                }elseif($today == 'Friday')
+                {
                     foreach($week as $day)
                     {
                         $workouts[] = $this->getWorkoutsAll($user, '5', $day, $userId, $date);
                     }
                     
-                }elseif($today == 'Saturday'){
-    
+                }elseif($today == 'Saturday')
+                {
                     foreach($week as $day)
                     {
                         $workouts[] = $this->getWorkoutsAll($user, '6', $day, $userId, $date);
                     }
     
-                }elseif($today == 'Sunday'){
-                    
+                }elseif($today == 'Sunday')
+                {
                     foreach($week as $day)
                     {
                         $workouts[] = $this->getWorkoutsAll($user, '7', $day, $userId, $date);
                     }
-    
                 }
     
-    
                 return $workouts;
-            
             }
-
         }            
 
         private function getPropertiesWorkoutsAll($user, $userId, $day, $interestedDate, $currentdate)
@@ -205,9 +191,10 @@
                 ->getRepository(Progres::class)
                 ->findWorkoutsByDay($interestedDate, $day, $userId, $currentdate);
 
-            if($workouts == true){    
-                foreach($workouts as $workout) {
-
+            if($workouts == true)
+            {    
+                foreach($workouts as $workout)
+                {
                     $workoutsProperties[$i]['date']     = $workouts[$i]->getDate();
                     $workoutsProperties[$i]['time']     = $workouts[$i]->getTime();
                     $workoutsProperties[$i]['day']      = $workouts[$i]->getDay();
@@ -240,22 +227,19 @@
                         $workoutsProperties[$i]['volume'] = $wv->getVolume($weight, $sets, $reps);
                     }
                     
-
                     $i++;
                 }
 
-                
                 return $workoutsProperties;
 
-            }else {
-
+            }else
+            {
                 return false;
             }
         }
 
         private function getPropertiesWorkouts($user, $userId, $interestedDate, $currentdate)
         {
-
             $i = 0;
             $workouts = array();
 
@@ -265,9 +249,10 @@
                 ->getRepository(Progres::class)
                 ->findAllWorkoutsWithoutToday($interestedDate, $user, $todaydate);
 
-            if($workouts == true){    
-                foreach($workouts as $workout) {
-
+            if($workouts == true)
+            {    
+                foreach($workouts as $workout)
+                {
                     $workoutsProperties[$i]['date']     = $workouts[$i]->getDate();
                     $workoutsProperties[$i]['time']     = $workouts[$i]->getTime();
                     $workoutsProperties[$i]['day']      = $workouts[$i]->getDay();
@@ -299,15 +284,13 @@
                         $workoutsProperties[$i]['weight'] = $weight;
                         $workoutsProperties[$i]['volume'] = $wv->getVolume($weight, $sets, $reps);
                     }
-
                     $i++;
                 }
 
-
                 return $workoutsProperties;
 
-            }else {
-
+            }else
+            {
                 return false;
             }
         }

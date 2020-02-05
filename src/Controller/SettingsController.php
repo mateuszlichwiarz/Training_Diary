@@ -30,8 +30,8 @@
         /**
          * @Rest\Get("/", name="app_settings");
          */
-        public function settings(Request $request) {
-
+        public function settings(Request $request)
+        {
             $allSettings = $this->getDoctrine()->getRepository(AllSettings::class)->findAll();
             //$idSettings = $allSettings->getId();
             //$nameSettings = $allSettings->getName();
@@ -44,8 +44,8 @@
         /**
          * @Rest\Get("/{id}/subsettings/", name="app_section_seting");
          */
-        public function sectionSettings(Request $request, $id) {
-
+        public function sectionSettings(Request $request, $id)
+        {
             $allSetings = $this->getDoctrine()->getRepository(AllSettings::class)->findOneBy(['id' => $id]);
 
             $subSettings = $allSetings->getSubSettings();
@@ -61,8 +61,8 @@
         /**
          * @Rest\Put("/{id}/subsettings/{subid}", name="app_edit_seting")
          */
-        public function editSeting(Request $request, $id, $subid) {
-
+        public function editSeting(Request $request, $id, $subid)
+        {
             $user = $this->getUser();
 
             $idSettings = $user->getHomepagesettings();
@@ -79,7 +79,8 @@
 
                 $form->handleRequest($request);
 
-                if($form->isSubmitted() && $form->isValid()) {
+                if($form->isSubmitted() && $form->isValid())
+                {
     
                     $homepageSettings= $form->getData();
     
@@ -107,8 +108,8 @@
                     'homepageSettings' => $homepageSettings
     
                 ]);
-            }
-            elseif($id == '4')
+
+            }elseif($id == '4')
             {
                 echo $id;
                 $generalSettings = new GeneralSettings();
@@ -120,8 +121,8 @@
 
                 $form->handleRequest($request);
 
-                if($form->isSubmitted() && $form->isValid()) {
-    
+                if($form->isSubmitted() && $form->isValid())
+                {
                     $generalSettings= $form->getData();
     
                     $entityManager = $this->getDoctrine()->getManager();

@@ -4,11 +4,10 @@
 
     class ConvertUnit
     {
-
         public function execute($unit, $weight)
         {
-
-            switch($unit){
+            switch($unit)
+            {
                 case 'lbs':
                     return $this->convertToLbs($weight);
                 break;
@@ -20,11 +19,9 @@
 
         private function convertToLbs($weight)
         {
-
             $result = $weight * 2.2;
 
             return $result;
-
         }
 
         private function convertToKg($weight)
