@@ -47,7 +47,8 @@
             $previousWeek = $id + 1;
             $forward = $id - 1;
 
-            if($forward == -1){
+            if($forward == -1)
+            {
                 $forward = 0;
             }
             

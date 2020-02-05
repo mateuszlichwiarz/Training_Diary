@@ -11,6 +11,7 @@
     use App\Service\Time;
     use App\Service\ShowWorkouts;
     use App\Service\ConvertUnit;
+    use App\Service\SimilarExercises;
 
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
@@ -30,8 +31,8 @@
         /**
          * @Route("/{}", name="app_homepage")
          */
-        public function index(Request $request, ShowWorkouts $ShowWorkouts) {
-
+        public function index(Request $request, ShowWorkouts $ShowWorkouts)
+        {
             $user = $this->getUser();
             $id = $user->getId();
 
@@ -42,19 +43,17 @@
             $daysEarlier = $homepageSettings->getDaysEarlier();
 
             $plan = $this->getDoctrine()->getRepository(ProgramTraining::class)->findOneBy(['user' => $id]);
-            
-
-            if($plan == true){
-
+            if($plan == true)
+            {
                 if(isset($_POST['new']))
                 {
                     $quickNew = $_POST['new'];
-                }else{
+                }else
+                {
                     $quickNew = 0;
                 }
 
                 $exercises = $plan->getExercises();
-
                 $exercisesCount = count($exercises);
 
                 $time = new Time();
@@ -63,16 +62,13 @@
 
                 $workouts = $ShowWorkouts->getWorkouts($user, $daysEarlier, $id, $date);
                 
-
                 $property = [];
-
                 $something = [];
-
                 $i = 0;
 
                 $progres = $this->getDoctrine()->getRepository(Progres::class)->findBy(['user' => $id, 'day' => $day, 'date' => $date]);
-                foreach($progres as $item3){
-
+                foreach($progres as $item3)
+                {
                     $something[$i] = $progres[$i]->getExercise();
 
                     if($weightUnit == 'lbs')
@@ -90,101 +86,51 @@
     
                         $progresConverted[$i]['weight'] = $weightConverted;
                     }
-
                     $i++;
                 }
 
                 $property = (array_diff($exercises,$something));
-
                 $property2 = [];
 
-                while(current($property)){
+                while(current($property))
+                {
                     array_push($property2, current($property));
                     next($property);
                 }
 
                 if(isset($_POST['similar']) && isset($_POST['name']))
                 {
+                    $name   = $_POST['name'];
                     $similar = $_POST['similar'];
-                    $name    = $_POST['name'];
 
-                    foreach($something as $item)
-                    {
-                        if($name == $item)
-                        {
-                            $i = 0;
-                            $letters = str_split($item);
-                            $countLetters = count($letters)-1;
+                    $createSimilar = new SimilarExercises(
+                        $name,
+                        $something,
+                        '#'
+                    );
 
-                            $wanted = array();
-                            $wantedStart = array();
-                            $number;
-
-                            foreach($letters as $letter)
-                            {
-                                if($letter == '#' )
-                                {
-                                    $number = $i;
-
-                                }else
-                                {
-                                    $name = $_POST['name'].'#2';
-                                }
-                                $i++;
-                            }
-
-                            $m = 0;
-                            if(isset($number))
-                            {
-                                for($l = 0; $l < $number; $l++)
-                                {
-                                    $wantedStart[$m] = $letters[$l];
-
-                                    $m++;
-                                }
-
-                                $k = 0;
-                                for($j = $number; $j <= $countLetters; $j++)
-                                {
-
-                                    $wanted[$k] = $letters[$j];
-
-                                    $end = $k;
-                                    $k++;
-                                }
-                                
-                                $numberEnd = $wanted[$end]+1;
-
-                                $numberForName = implode("", $wanted);
-
-                                $exerciseName = implode("", $wantedStart);
-
-                                $name = $exerciseName.'#'.$numberEnd;
-                            }
-                        }
-                    }
-                    
-                }else{
+                    $name = $createSimilar->main();
+                
+                }else
+                {
                     $similar = 0;
                     $name = 0;
                 }
 
-                if(isset($_POST['exercise']) && isset($_POST['weight']) && isset($_POST['sets']) && isset($_POST['reps'])) {
-
+                if(isset($_POST['exercise']) && isset($_POST['weight']) && isset($_POST['sets']) && isset($_POST['reps']))
+                {
                         $weight   = $_POST['weight'];
                         $sets     = $_POST['sets'];
                         $reps     = $_POST['reps'];
                         $exercise = $_POST['exercise'];
                     
-                    if($weight == true && $sets == true && $reps == true) {
-
+                    if($weight == true && $sets == true && $reps == true)
+                    {
                         if($weightUnit == 'lbs')
                         {
                             $convertion = new ConvertUnit();
                             $weightConverted = $convertion->execute('kg', $weight);
                         }
-                        
-
                         $datetime = new Time();
                         $date = $datetime->getDate();
                         
@@ -203,7 +149,6 @@
                         {
                             $add->setWeight(0);
                         }
-
                         $add->setSets($sets);
                         $add->setReps($reps);
                         $add->setDate($date);
@@ -215,13 +160,13 @@
                         
                         $message['correct'] = "You add exercise today progres, Excellent!";
 
-                        $property = [];
+                        $property  = [];
                         $something = [];
                         $i = 0;
                         
                         $progres = $this->getDoctrine()->getRepository(Progres::class)->findBy(['user' => $id, 'day' => $day, 'date' => $date]);
-                        foreach($progres as $item3){
-            
+                        foreach($progres as $item3)
+                        {
                             $something[$i] = $progres[$i]->getExercise();
 
                             if($weightUnit == 'lbs')
@@ -233,25 +178,21 @@
             
                                 $weight = $progres[$i]->getWeight();
 
-
                                 $convertion = new ConvertUnit();
                                 $weightConverted = $convertion->execute('lbs', $weight);
             
                                 $progresConverted[$i]['weight'] = $weightConverted;
                             }
-            
                             $i++;
                         }
-
                         $property = (array_diff($exercises,$something));
-            
                         $property2 = [];
             
-                        while(current($property)){
+                        while(current($property))
+                        {
                             array_push($property2, current($property));
                             next($property);
                         }
-
                         $time = new Time();
                         $day = $time->getDay();
                         $date = $time->getDate();
@@ -290,8 +231,8 @@
                             ]);
                         }
                         
-                    } else {
-
+                    } else
+                    {
                         $message['error'] = "Please fill fields!";
 
                         return $this->render('diary/index.html.twig', [
@@ -314,7 +255,7 @@
                     
                 }
 
-                if($weightUnit == 'lbs' &&  isset($progresConverted) )
+                if($weightUnit == 'lbs' &&  isset($progresConverted))
                 {
                     return $this->render('diary/index.html.twig', [
                         'plan' => $plan,
@@ -346,26 +287,22 @@
                     ]);
                 }
 
-
-            }else{
-        
-                
+            }else
+            {    
                 $message['info'] = "Create your new workout, click here!";
 
                 return $this->render('diary/index.html.twig', [
                     'plan' => $plan,
                     'message' => $message
                 ]);
-            
             }
-        
         }
 
         /**
          * @Rest\Delete("/{}/{id}", name="app_delete_workout")
          */
-        public function delete(Request $request, $id) {
-
+        public function delete(Request $request, $id)
+        {
             $time = new Time();
             $day = $time->getDay();
 
@@ -379,15 +316,13 @@
             $response->send();
 
             return $this->redirect('/login/{}');
-            
         }
-
 
         /**
          * @Rest\Post("/{}/new", name="app_new")
          */
-        public function new(Request $request) {
-
+        public function new(Request $request)
+        {
             $user = $this->getUser();
             $id = $user->getId();
 
@@ -405,7 +340,8 @@
 
             $form->handleRequest($request);
 
-            if($form->isSubmitted() && $form->isValid()) {
+            if($form->isSubmitted() && $form->isValid())
+            {
                 $plan = $form->getData();
 
                 $entityManager = $this->getDoctrine()->getManager();

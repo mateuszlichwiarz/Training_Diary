@@ -2,10 +2,8 @@
 
     namespace App\Service;
 
-    
     class Time
     {
-
         public function dateFromAgo($howLong)
         {
             $currentDate = $this->getDate();
@@ -37,8 +35,6 @@
         public function getDay()
         {
             $date = date("D");
-
-            
             $day = $this->explificationEnd($date);
 
             return $day;
@@ -62,7 +58,8 @@
 
         private function explificationEnd($day)
         {
-            switch($day){
+            switch($day)
+            {
                 case "Mon":
                     $day = 'Monday';
                 break;
