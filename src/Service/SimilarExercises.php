@@ -82,14 +82,26 @@
 
             foreach($letters as $letter)
             {
-                echo $letter.'<br>';
                 if($letter == $char)
                 {
                     $position = $i;
-                    
+
                     return $position;
+
+                    echo $position;
+                    
+                }else
+                {
+                    $position = '0';
+
+                    echo $position;
                 }
                 $i++;
+            }
+
+            if($position == 0)
+            {
+                return false;
             }
         }
 
@@ -118,11 +130,10 @@
             {
                 $ending[$j] = $letters[$i];
 
-                $positionOfLast = $j;
+                $last = $j;
                 $j++;
             }
-                                
-            $lastOne = $ending[$end]+1;
+            $lastOne = $ending[$last]+1;
 
             return $lastOne;
 
@@ -131,7 +142,7 @@
         private function newName($position, $countOfLetters, $letters)
         {                       
             $lastOne = $this->getLastOneFromEnding($position, $countOfLetters, $letters);
-            $pureExerciseName = $this->getPureExerciseName($position);
+            $pureExerciseName = $this->getPureExerciseName($position, $letters);
 
             $name = $pureExerciseName.'#'.$lastOne;
 
