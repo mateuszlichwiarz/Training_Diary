@@ -24,7 +24,7 @@
 
     /**
      * Trening diary controller
-     * @Route("/login", name="")
+     * @Route("/homepage", name="")
      */
     class DiaryController extends AbstractController
     {
