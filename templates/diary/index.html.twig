@@ -41,7 +41,7 @@
 
     {% if message.info is defined %}
 
-    <form method="POST" action="/homepage/new">
+    <form method="POST" action="{{ path('app_new') }}">
         <div class="alert alert-dismissible alert-light">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <button type="submit" class="btn nav-link">{{ message.info }}</button>
@@ -80,14 +80,14 @@
                         <td>
                             <div id="actions">
                                 <div class="similar" style="float: left;">
-                                    <form method="POST" action="/homepage">
+                                    <form method="POST" action="{{ path('app_homepage') }}">
                                         <input type="hidden" id="similar" name="similar" value="1">
                                         <input type="hidden" id="name" name="name" value="{{ item.exercise }}">
                                         <input type="submit" class="btn btn-success" value="Similar">
                                     </form>
                                 </div>
                                 <div style="float: left;">
-                                    <form method="POST" action="/homepage/{{ item.id }}">
+                                    <form method="POST" action="{{ path('app_delete_workout', {id: item.id}) }}">
                                         <input type="hidden" name="_method" value="DELETE"/>
                                         <input type="submit" class="btn btn-danger" value="Delete">
                                     </form>
@@ -103,7 +103,7 @@
                 {% if quickNew is defined %}
                 {% if quickNew == 1 %}
                     <tr>
-                        <form method="POST" id="form"."similar" action="/homepage">
+                        <form method="POST" id="form"."similar" action="{{ path('app_homepage') }}">
                             <td>
                                 <div class="row">
                                     <div class="col-9 col-sm-5 col-lg-7 col-xl-7">
@@ -151,7 +151,7 @@
                         <div class="col-9 col-sm-5 col-lg-7 col-xl-7">
                         <td>{{ name }}</td>
                         </div>
-                        <form method="POST" id="form"."similar" action="/homepage">
+                        <form method="POST" id="form"."similar" action="{{ path('app_homepage') }}">
 
                             <td>
                                 <div class="row no-gutters">
@@ -197,7 +197,7 @@
                         <td>
                          <div class="actions">
                                 <div class="similar" style="float: left;">
-                                    <form method="POST" action="/homepage">
+                                    <form method="POST" action="{{ path('app_homepage') }}">
                                         <input type="hidden" id="similar" name="similar" value="1">
                                         <input type="hidden" id="name" name="name" value="{{ item.exercise }}">
                                         <input type="submit" class="btn btn-success" value="Similar">
@@ -216,7 +216,7 @@
                 </div>
                 {% endfor %}
 
-                <form method="POST" action="/homepage">
+                <form method="POST" action="{{ path('app_homepage') }}">
                     <input type="submit" class="btn btn-success" value="Similar">
                 </form>
 
@@ -228,7 +228,7 @@
                         <div class="col-9 col-sm-5 col-lg-7 col-xl-7">
                         <td> {{ exercise }}</td>
                         </div>
-                        <form method="POST" id="form"."{{ loop.index0 }}" action="/homepage">
+                        <form method="POST" id="form"."{{ loop.index0 }}" action="{{ path('app_homepage') }}">
 
                             <td>
                                 <div class="row no-gutters">
@@ -265,7 +265,7 @@
             </tbody>
         </table>
         
-        <form method="POST" action="/homepage">
+        <form method="POST" action="{{ path('app_homepage') }}">
             <input type="hidden" name="new" id="new" value="1">
             <input type="submit" class="btn btn-success" value="Quick New Exercise">
         </form>
