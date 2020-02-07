@@ -26,7 +26,7 @@
     class ProgresController extends AbstractController
     {
         /**
-         * @Route("/progres/{id}")
+         * @Route("/progres/{id}", name="app_progres")
          */
         public function progres(ShowWorkouts $ShowWorkouts, $id)
         {   
