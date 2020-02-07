@@ -21,7 +21,7 @@
 
      /**
      * Progres controller
-     * @Route("/login/{}", name="")
+     * @Route("/homepage", name="")
      */
     class ProgresController extends AbstractController
     {
