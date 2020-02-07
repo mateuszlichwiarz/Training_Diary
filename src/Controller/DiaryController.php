@@ -6,8 +6,6 @@
     use App\Entity\User;
     use App\Entity\Progres;
 
-    use App\Form\Type\NewType;
-
     use App\Service\Time;
     use App\Service\ShowWorkouts;
     use App\Service\ConvertUnit;
@@ -318,41 +316,4 @@
             return $this->redirect('/homepage');
         }
 
-        /**
-         * @Rest\Post("/new", name="app_new")
-         */
-        public function new(Request $request)
-        {
-            $user = $this->getUser();
-            $id = $user->getId();
-
-            $datetime = new Time();
-            $date = $datetime->getDate();
-
-            $plan = new ProgramTraining();
-            $plan->setUser($id);
-            $plan->setDate($date);
-            $plan->setTime($date);
-
-            $form = $this->createForm(NewType::class, $plan, [
-                'method' => 'POST'
-            ]);
-
-            $form->handleRequest($request);
-
-            if($form->isSubmitted() && $form->isValid())
-            {
-                $plan = $form->getData();
-
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($plan);
-                $entityManager->flush();
-
-                return $this->Redirect('/login/{}');
-            }
-
-            return $this->render('diary/new.html.twig', array(
-                'form' => $form->createView()
-            ));
-        }
     }
