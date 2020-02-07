@@ -29,7 +29,7 @@
     class DiaryController extends AbstractController
     {
         /**
-         * @Route("/{}", name="app_homepage")
+         * @Route("", name="app_homepage")
          */
         public function index(Request $request, ShowWorkouts $ShowWorkouts)
         {
@@ -299,7 +299,7 @@
         }
 
         /**
-         * @Rest\Delete("/{}/{id}", name="app_delete_workout")
+         * @Rest\Delete("/{id}", name="app_delete_workout")
          */
         public function delete(Request $request, $id)
         {
@@ -319,7 +319,7 @@
         }
 
         /**
-         * @Rest\Post("/{}/new", name="app_new")
+         * @Rest\Post("/new", name="app_new")
          */
         public function new(Request $request)
         {
