@@ -17,10 +17,10 @@
 
     <div class="changeweek">
         {% if previous == 1 %}
-        <a class="btn btn-info" href="/login/{}/progres/{{ previous }}">Previous week > </a>
+        <a class="btn btn-info" href="{{ path('app_progres', {'id': previous}) }}">Previous week > </a>
         {% else %}
-        <a class="btn btn-info" href="/login/{}/progres/{{ forward }}"> < Forward</a>
-        <a class="btn btn-info" href="/login/{}/progres/{{ previous }}">Previous week > </a>
+        <a class="btn btn-info" href="{{ path('app_progres', {'id': forward}) }}"> < Forward</a>
+        <a class="btn btn-info" href="{{ path('app_progres', {'id': previous}) }}">Previous week > </a>
         {% endif %}
     </div>
 
@@ -30,7 +30,7 @@
     {% if items == true %}
 
         <div class="progres">
-                <h4>{{ items.0.day }} | {{ items.0.date|date("Y-m-d") }} </h4>
+            <h4>{{ items.0.day }} | {{ items.0.date|date("Y-m-d") }} </h4>
             <table id="workout_friday" class="table table-striped">
                 <thead>
                     <tr>
@@ -54,11 +54,8 @@
                 </tbody>
 
                 {% endfor %}
-
             </table>
-
         </div>
-
         {% else %}
 
     {% endif %}
@@ -66,16 +63,14 @@
     <br>
 
     {% endfor %}
-
     
     <div class="changeweek">
         {% if previous == 1 %}
         {% else %}
-        <a class="btn btn-info" href="/login/{}/progres/{{ forward }}"> < Forward</a>
+        <a class="btn btn-info" href="{{ path('app_progres', {'id': forward}) }}"> < Forward</a>
         {% endif %}
-        <a class="btn btn-info" href="/login/{}/progres/{{ previous }}"> Previous week > </a>
+        <a class="btn btn-info" href="{{ path('app_progres', {'id': previous}) }}"> Previous week > </a>
     </div>
-
     <br>
     <br>
     <br>
