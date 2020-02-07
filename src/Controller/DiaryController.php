@@ -315,7 +315,7 @@
             $response = new Response();
             $response->send();
 
-            return $this->redirect('/login/{}');
+            return $this->redirect('/homepage');
         }
 
         /**
