@@ -21,8 +21,8 @@
     use Symfony\Component\Routing\Annotation\Route;
 
     /**
-     * Trening settings controller
-     * @Route("/login/{}/settings", name="")
+     * Training settings controller
+     * @Route("/settings", name="")
      */
     class SettingsController extends AbstractController
     {
