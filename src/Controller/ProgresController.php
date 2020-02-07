@@ -20,13 +20,13 @@
 
 
      /**
-     * Progres controller
-     * @Route("/homepage", name="")
+     * Training progres controller
+     * @Route("/progres", name="")
      */
     class ProgresController extends AbstractController
     {
         /**
-         * @Route("/progres/{id}", name="app_progres")
+         * @Route("/{id}", name="app_progres")
          */
         public function progres(ShowWorkouts $ShowWorkouts, $id)
         {   

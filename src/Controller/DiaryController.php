@@ -23,7 +23,7 @@
     use Symfony\Component\Routing\Annotation\Route;
 
     /**
-     * Trening diary controller
+     * Training diary controller
      * @Route("/homepage", name="")
      */
     class DiaryController extends AbstractController
