@@ -20,12 +20,12 @@
 
     /**
      * Training plan controller
-     * @Route("/new", name="")
+     * @Route("/plan", name="")
      */
     class PlanController extends AbstractController
     {
         /**
-         * @Rest\Post("", name="app_new")
+         * @Rest\Post("/new", name="app_new")
          */
         public function new(Request $request)
         {
