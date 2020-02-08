@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}About{% endblock %}
+
+{% block body %}
+
+    <br><br>
+    <h3>About Webiste</h3>
+
+    <h5>Website was created for study symfony 4 and just for fun :)</h5>
+    <br><br><br>
+
+    {% if app.user.id is defined %}
+        <a class="btn btn-danger" href="{{ path('app_homepage') }}">Back</a>
+    {% else %}
+        <a class="btn btn-danger" href="{{ path('app_login') }}">Back</a>
+    {% endif %}
+
+{% endblock %}
