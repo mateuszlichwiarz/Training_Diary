@@ -21,8 +21,6 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        for($i = 0; $i < 5; $i++) {
-
             $homepageSettings = new HomepageSettings();
             $homepageSettings->setDaysEarlier(7);
 
@@ -30,10 +28,10 @@ class UserFixtures extends Fixture
             $generalSettings->setWeightUnit('kg');
 
             $user = new User();
-            $user->setEmail('user'.$i.'@gmail.com');
+            $user->setEmail('user0@gmail.com');
             $user->setPassword($this->passwordEncoder->encodePassword(
                 $user,
-                'password'.$i
+                'password0'
             ));
             $user->setHomepagesettings($homepageSettings);
             $user->setGeneralsettings($generalSettings);
@@ -41,7 +39,6 @@ class UserFixtures extends Fixture
             $manager->persist($homepageSettings);
             $manager->persist($generalSettings);
             $manager->persist($user);
-        }
 
         $manager->flush();
 
