@@ -1,6 +1,6 @@
 Training diary for powerlifters.
 Technologies: PHP/Symfony4, Twig3, Html5, css3, bootstrap4
-
+Bootstrap theme is from bootswatch.com. 'Darkly' Made by Thomas Park :)
 About:
 Training diary have simple authentification system.
 The application allows for adding new progres in exercises in user training plan located in homepage.
@@ -10,7 +10,6 @@ In diary is seemingly similar button, is called 'similar'.He is next to every ex
 Application checks user progres and note it in database. Later, all exercises is showing special section named "progres". This section shows user all exercises in actual week.
 Diary count training volume and allow you to choose between lbs or kg.
 Also, in homepage is waiting for users special section where is showing previous workouts. Default shows two days in the past from today but in option user can change it or complitely off.
-
 Instalation:
 1. Clone repository.
 2. Set DATABASE_URL in env
@@ -22,4 +21,3 @@ Instalation:
 8. Open in browser: http://127.0.0.1:8000 (all you need is this, not /something/)
 9. Email: user0@gmail.com
 10.Password: password0
-End
