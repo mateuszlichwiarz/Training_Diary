@@ -54,7 +54,7 @@
                 $entityManager->persist($plan);
                 $entityManager->flush();
 
-                return $this->Redirect('/login/{}');
+                return $this->Redirect('/homepage');
             }
 
             return $this->render('diary/new.html.twig', array(
