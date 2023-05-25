@@ -11,6 +11,7 @@ In diary is seemingly similar button, is called 'similar'.He is next to every ex
 Application checks user progres and note it in database. Later, all exercises section named "progres". This section shows user all exercises in actual week.
 Diary count training volume and allow you to choose between lbs or kg.
 Also, in homepage is waiting for users special section where is showing previous workouts. Default shows two days in the past from today but in option user can change it or complitely off.
+
 Instalation:
 1. Clone repository
 2. configure DATABASE_URL in env
