@@ -14,15 +14,38 @@ App has section named 'progress'. This section shows user all exercises in actua
 Diary also count training volume and allow User to choose between lbs or kg.
 In Diary Homepage show special section where is previous workouts. In Default shows two days in the past from current day but in option user can change it or turn off.
 
-## Instalation steps
+## Instalation Guide
 
-1: Clone repository<br>
-2: Configure DATABASE_URL in env<br>
-3: Enter php bin/console make:migration<br>
-4: Enter php bin/console doctrine:migrations:migrate<br>
-5: Enter php bin/console doctrine:fixtures:load<br>
-6: Enter php/bin run:server or symfony server:start<br>
-
+First step: <br>
+``` sh
+php/bin run:server
+```
+Or <br>
+``` sh
+symfony server:start
+```
+Second step: <br>
+``` sh
+git clone https://github.com/mateuszlichwiarz/Training-diary.git
+```
+Third step: <br><br>
+Configure DATABASE_URL in env<br><br>
+Fourth step: <br>
+``` sh
+php bin/console doctrine:database:create
+```
+Fifth step: <br>
+``` sh
+php bin/console make:migration
+```
+Sixth step: <br>
+``` sh
+php bin/console doctrine:migrations:migrate
+```
+Seventh step: <br>
+``` sh
+php bin/console doctrine:fixtures:load
+```
 
 ## Credentials
 Email: user0@gmail.com <br>
