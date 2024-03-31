@@ -3,14 +3,16 @@ Technologies: PHP, Symfony4, Twig, Html5, css3, bootstrap4
 Bootstrap theme is from bootswatch.com. 'Darkly' Made by Thomas Park
 
 About:
-Training diary have simple authentification system.
-The application allows for adding new progres in exercises in user training plan.
-User can add weight, reps, sets in exercise but if he want, he can click on 'quick exercise' button and now user can set name and other parameters to new exercise but this exercise is not permanent in trening plan like other exercises.
-In diary is seemingly similar button, is called 'similar'.He is next to every exercise in trening plan. Is responsible for possibility adding the same exercises but adds '#{int}' in name exercise e.g 'deadlift' and similar 'deadlift#2'.  
+Training diary has Symfony authentification system.
+The application allows for adding new progres in exercises in User Training Plan.
+User has possibility to add weight, reps, sets in exercise but if he want, he can click on 'quick exercise' button. Now User can set name and other parameters to new exercise.
+Diary has also buttons named 'similar'.This button is multiplayed and displays next to every exercise in trening plan. Is just adding the same exercises but with changed name e.g 'deadlift' for 'deadlift#2'.  
 
-Application checks user progres and note it in database. Later, all exercises section named "progres". This section shows user all exercises in actual week.
-Diary count training volume and allow you to choose between lbs or kg.
-Also, in homepage is waiting for users special section where is showing previous workouts. Default shows two days in the past from today but in option user can change it or complitely off.
+
+Main functionality of App is checking User progress and flush it in database.
+App has section named 'progress'. This section shows user all exercises in actual week.
+Diary also count training volume and allow User to choose between lbs or kg.
+In Diary Homepage show special section where is previous workouts. In Default shows two days in the past from current day but in option user can change it or turn off.
 
 Instalation:
 1. Clone repository
