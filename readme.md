@@ -17,13 +17,14 @@ In Diary Homepage show special section where is previous workouts. In Default sh
 
 ## Instalation steps
 
-1: Clone repository
-2: Configure DATABASE_URL in env
-3: Enter php bin/console make:migration
-4: Enter php bin/console doctrine:migrations:migrate
-5: Enter php bin/console doctrine:fixtures:load
-6: Enter php/bin run:server or symfony server:start
+1: Clone repository<br>
+2: Configure DATABASE_URL in env<br>
+3: Enter php bin/console make:migration<br>
+4: Enter php bin/console doctrine:migrations:migrate<br>
+5: Enter php bin/console doctrine:fixtures:load<br>
+6: Enter php/bin run:server or symfony server:start<br>
+
 
 ## Credentials
-Email: user0@gmail.com
-Password: password0
+Email: user0@gmail.com <br>
+Password: password0 <br>
