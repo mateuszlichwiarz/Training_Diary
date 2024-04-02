@@ -3,7 +3,7 @@
 Training Diary for powerlifters.
 
 > [!NOTE]
-> Technology: PHP 7.2 Symfony 4.3
+> PHP 7.2 Symfony 4.3
 
 ## About:
 Main functionality of App is checking User progress and flush it in database. Training diary has Symfony authentification system.
@@ -16,36 +16,13 @@ In Diary Homepage show special section where is previous workouts. In Default sh
 
 ## Instalation Guide
 
-First step: <br>
-``` sh
-php/bin run:server
-```
-Or <br>
-``` sh
-symfony server:start
-```
-Second step: <br>
-``` sh
-git clone https://github.com/mateuszlichwiarz/Training-diary.git
-```
-Third step: <br><br>
-Configure DATABASE_URL in env<br><br>
-Fourth step: <br>
-``` sh
-php bin/console doctrine:database:create
-```
-Fifth step: <br>
-``` sh
-php bin/console make:migration
-```
-Sixth step: <br>
-``` sh
-php bin/console doctrine:migrations:migrate
-```
-Seventh step: <br>
-``` sh
-php bin/console doctrine:fixtures:load
-```
+1. `git clone https://github.com/mateuszlichwiarz/Training-diary.git`
+2. `php/bin run:server` or `symfony server:start`
+3.  configure DATABASE_URL in env file
+4. `php bin/console doctrine:database:create`
+5. `php bin/console make:migration`
+6. `php bin/console doctrine:migrations:migrate`
+7. `php bin/console doctrine:fixtures:load`
 
 ## Credentials
 Email: user0@gmail.com <br>
